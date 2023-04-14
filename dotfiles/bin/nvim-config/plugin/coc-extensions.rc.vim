@@ -1,0 +1,19 @@
+let g:coc_global_extensions = [
+      \ '@yaegassy/coc-volar',
+      \ '@yaegassy/coc-volar-tools',
+      \ 'coc-angular',
+      \ 'coc-css',
+      \ 'coc-cssmodules',
+      \ 'coc-docker',
+      \ 'coc-eslint',
+      \ 'coc-html',
+      \ 'coc-html-css-support',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-pyright',
+      \ 'coc-sh',
+      \ 'coc-tsserver',
+      \ 'coc-yaml',
+      \ 'coc-json'
+      \ ]
