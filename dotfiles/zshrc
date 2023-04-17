@@ -50,7 +50,7 @@ alias icat='kitty +kitten icat'
 alias diffk='kitty +kitten diff'
 
 # dotdrop
-export DOTREPO="$HOME/dotfiles"
+export DOTREPO="$HOME/Documentos/dotfiles"
 
 alias dotdrop="eval $(grep -v "^#" $DOTREPO/.env) $DOTREPO/dotdrop.sh --cfg=$DOTREPO/config.yaml"
 alias dotgit="git -C $DOTREPO"
@@ -72,3 +72,6 @@ if [ -d "$HOME/.local/share/fnm" ]; then
     export PATH="$HOME/.local/share/fnm:$PATH"
     eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 fi
+
+# Angular CLI completion
+# if command -v ng &>/dev/null; then source <(ng completion script); fi

@@ -1,45 +1,83 @@
 return {
-  "nvim-lua/plenary.nvim",
-  "nvim-lua/popup.nvim",
+  -- Show pending keys
   {
-    "nvim-tree/nvim-web-devicons",
-    config = function() require("nvim-web-devicons").setup() end,
+    'folke/which-key.nvim',
+    lazy = false,
+    config = true,
   },
 
-  -- colorscheme
+  -- Colorscheme
   {
-    "folke/tokyonight.nvim",
+    'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
-    config = function() require("tokyonight").load() end,
+    config = function()
+      vim.cmd [[colorscheme tokyonight]]
+    end,
+  },
+
+  -- Icons
+  {
+    'nvim-tree/nvim-web-devicons',
+    lazy = false,
+    config = true,
   },
 
   {
-    "folke/noice.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
+    'folke/noice.nvim',
+    event = 'VeryLazy',
     config = function()
-      require("noice").setup {
+      require('noice').setup {
         notify = {
-          view = "mini",
+          view = 'mini',
         },
         messages = {
-          view = "mini",
+          view = 'mini',
         },
         errors = {
-          view = "mini",
+          view = 'mini',
         },
+        lsp = {
+          hover = {
+            enabled = false,
+          },
+          signature = {
+            enabled = false,
+          },
+        },
+      }
+    end,
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify',
+    },
+  },
+  {
+    'rcarriga/nvim-notify',
+    lazy = false,
+    config = function()
+      require('notify').setup {
+        background_colour = '#000000',
       }
     end,
   },
+
+  -- Terminal
   {
-    "rcarriga/nvim-notify",
-    config = function()
-      require("notify").setup {
-        background_color = "#000000",
-      }
-    end,
+    'akinsho/toggleterm.nvim',
+    cmd = { 'ToggleTerm', 'TermExec' },
+    keys = {
+      { '<F7>', '<cmd>ToggleTerm<cr>', { desc = 'Toggle terminal' } },
+    },
+    opts = {
+      size = 10,
+      open_mapping = [[<F7>]],
+      shading_factor = 2,
+      direction = 'float',
+      float_opts = {
+        border = 'curved',
+        highlights = { border = 'Normal', background = 'Normal' },
+      },
+    },
   },
 }

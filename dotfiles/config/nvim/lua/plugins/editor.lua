@@ -1,21 +1,33 @@
 return {
-  -- comments
-  {
-    "numToStr/Comment.nvim",
-    config = true,
-  },
+  'tpope/vim-sleuth',
 
-  { "lukas-reineke/indent-blankline.nvim" },
+  -- Statusline
   {
-    "m4xshen/autoclose.nvim",
-    config = true,
-  },
-
-  {
-    "folke/trouble.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = 'tokyonight',
+        component_separators = '|',
+        section_separators = '',
+      },
     },
-    config = function() require "config.trouble" end,
+  },
+
+  {
+    'numToStr/Comment.nvim',
+    config = true,
+  },
+
+  -- Syntax
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    build = ':TSUpdate',
+    config = function()
+      require 'config.treesitter'
+    end,
   },
 }
