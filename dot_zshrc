@@ -50,16 +50,9 @@ alias icat='kitty +kitten icat'
 alias diffk='kitty +kitten diff'
 alias open='xdg-open'
 
-# dotdrop
-# export DOTREPO="$HOME/Documentos/dotfiles"
-#
-# alias dotdrop="eval $(grep -v "^#" $DOTREPO/.env) $DOTREPO/dotdrop.sh --cfg=$DOTREPO/config.yaml"
-# alias dotgit="git -C $DOTREPO"
-# alias dotsync="dotgit pull && dotgit add -A && dotgit commit && dotgit push; dotdrop install"
-
 # chezmoi
-alias cgit="chezmoi git"
-alias csync="chezmoi re-add && chezmoi git -- add -A && chezmoi git commit"
+alias cz="chezmoi"
+alias czsync="cz re-add && cz git -- add -A && cz git commit && cz git push"
 
 export EDITOR="nvim"
 
