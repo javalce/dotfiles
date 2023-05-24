@@ -10,9 +10,9 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
-
 local mappings = {
   n = {
+
     { "<leader>pv", vim.cmd.Ex, { desc = "Native Explorer" } },
     { "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" } },
     { "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" } },
@@ -25,6 +25,8 @@ local mappings = {
     { "<C-l>", "<right>", { desc = "Move cursor right" } },
     { "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" } },
     { "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" } },
+    { "<C-s>", "<esc><cmd>:w<cr>==gi", { desc = "Save file" } },
+    { "<C-S-s>", "<esc><cmd>:wa<cr>==gi", { desc = "Save all files" } },
   },
   v = {
     { "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line selection down" } },
