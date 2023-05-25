@@ -132,6 +132,8 @@ return {
             "typescriptreact",
             "python",
             "lua",
+            "markdown",
+            "markdown.mdx",
           },
         },
       }
@@ -157,6 +159,7 @@ return {
               return { PYTHONPATH = params.root }
             end,
           },
+          diagnostics.markdownlint,
 
           -- formatting
           formatting.black,
