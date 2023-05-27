@@ -118,6 +118,7 @@ return {
         "lua_ls",
         "pyright",
         "jsonls",
+        "bashls",
       }
 
       lsp.format_on_save {
@@ -134,6 +135,7 @@ return {
             "lua",
             "markdown",
             "markdown.mdx",
+            "sh",
           },
         },
       }
@@ -160,12 +162,14 @@ return {
             end,
           },
           diagnostics.markdownlint,
+          diagnostics.shellcheck,
 
           -- formatting
           formatting.black,
           formatting.eslint_d,
           formatting.prettier,
           formatting.stylua,
+          formatting.shfmt,
         },
       }
 
