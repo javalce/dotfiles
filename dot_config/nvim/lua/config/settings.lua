@@ -20,7 +20,7 @@ local options = {
   linebreak = true, -- wrap on boundary
   conceallevel = 0,
   termguicolors = true,
-  guifont = "JetBrainsMono Nerd Font",
+  guifont = "JetBrainsMono Nerd Font Mono",
   scrolloff = 8,
   signcolumn = "yes",
 
