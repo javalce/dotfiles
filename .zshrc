@@ -52,6 +52,9 @@ alias open='xdg-open'
 
 export EDITOR="nvim"
 
+# yadm alias
+alias yadmsync="yadm add -u && yadm commit && yadm push"
+
 # Load starship theme
 if command -v starship &>/dev/null; then
     export STARSHIP_CONFIG=~/.config/starship/starship.toml
