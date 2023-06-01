@@ -50,10 +50,6 @@ alias icat='kitty +kitten icat'
 alias diffk='kitty +kitten diff'
 alias open='xdg-open'
 
-# chezmoi
-alias cz="chezmoi"
-alias czsync="cz re-add && cz git -- add -A && cz git commit && cz git push"
-
 export EDITOR="nvim"
 
 # Load starship theme
