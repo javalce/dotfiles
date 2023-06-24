@@ -6,8 +6,10 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
+config.font = wezterm.font({ family = "JetBrains Mono", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
 config.font_size = 12
+config.bold_brightens_ansi_colors = false
+config.freetype_load_target = "Normal"
 config.color_scheme = "GNOME"
 -- config.color_scheme = "TokyoNight"
 -- config.color_scheme = "IDEA Dark"

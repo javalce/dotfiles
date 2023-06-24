@@ -1,41 +1,28 @@
-local Util = require "config.utils"
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+
+local Util = require("lazyvim.util")
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
+  -- @cast keys LazyKeysHandler
   -- do not create the keymap if a lazy keys handler exists
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
     opts.silent = opts.silent ~= false
+    if opts.remap and not vim.g.vscode then
+      opts.remap = nil
+    end
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
-local mappings = {
-  n = {
 
-    { "<leader>pv", vim.cmd.Ex, { desc = "Native Explorer" } },
-    { "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" } },
-    { "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" } },
-    { "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" } },
-  },
-  i = {
-    { "<C-h>", "<left>", { desc = "Move cursor left" } },
-    { "<C-j>", "<down>", { desc = "Move cursor down" } },
-    { "<C-k>", "<up>", { desc = "Move cursor up" } },
-    { "<C-l>", "<right>", { desc = "Move cursor right" } },
-    { "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" } },
-    { "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" } },
-    { "<C-s>", "<esc><cmd>:w<cr>==gi", { desc = "Save file" } },
-    { "<C-S-s>", "<esc><cmd>:wa<cr>==gi", { desc = "Save all files" } },
-  },
-  v = {
-    { "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line selection down" } },
-    { "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line selection up" } },
-  },
-}
-
-for mode, maps in pairs(mappings) do
-  for _, keys in ipairs(maps) do
-    map(mode, keys[1], keys[2], keys[3])
-  end
+-- Use tabs to change buffer
+if Util.has("bufferline.nvim") then
+  map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
+  map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+else
+  map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+  map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 end
