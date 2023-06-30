@@ -7,7 +7,9 @@ if wezterm.config_builder then
 end
 
 -- config.font = wezterm.font({ family = "JetBrains Mono", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
-config.font = wezterm.font({ family = "Cascadia Code", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
+config.font =
+	wezterm.font({ family = "CaskaydiaCove Nerd Font Mono", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
+-- config.font = wezterm.font({ family = "Cascadia Code", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
 config.font_size = 12
 config.bold_brightens_ansi_colors = false
 config.freetype_load_target = "Normal"
