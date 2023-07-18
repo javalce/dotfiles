@@ -116,11 +116,22 @@ if ! [[ "$PATH" =~ $HOME/bin:$HOME/.local/bin ]]; then
     export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 fi
 
-# User bash completions
-# if [ -d "$HOME/.bash_completion" ];
-
 # fnm
 if [ -d "$HOME/.local/share/fnm" ]; then
     export PATH="$HOME/.local/share/fnm:$PATH"
     eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 fi
+
+# Load starship prompt
+if command -v starship &>/dev/null; then
+    export STARSHIP_CONFIG="~/.config/starship/starship.toml"
+    eval "$(starship init bash)"
+fi
+
+# Load zoxide (z command)
+if command -v zoxide &>/dev/null; then eval "$(zoxide init bash)"; fi
+
+# Angular CLI completion
+if command -v ng &>/dev/null; then source <(ng completion script); fi
+
+PATH=~/.console-ninja/.bin:$PATH
