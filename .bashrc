@@ -111,9 +111,6 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-# User path
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
 # fnm
 if [ -d "$HOME/.local/share/fnm" ]; then
 	export PATH="$HOME/.local/share/fnm:$PATH"
@@ -139,3 +136,5 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+PATH=~/.console-ninja/.bin:$PATH

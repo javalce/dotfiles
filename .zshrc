@@ -1,6 +1,3 @@
-# User path
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
 export EDITOR="nvim"
 
 # ANTIGEN PLUGIN MANAGER
@@ -60,7 +57,7 @@ if command -v ng &>/dev/null; then source <(ng completion script); fi
 # pnpm
 export PNPM_HOME="/home/javalce/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end

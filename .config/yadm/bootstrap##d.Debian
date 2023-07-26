@@ -1,0 +1,122 @@
+#!/bin/sh
+
+reload_shell_path() {
+    # Reload shell path
+    # shellcheck source=/dev/null
+    . "$HOME/.profile"
+}
+
+prepare_environment() {
+    # Update system
+    sudo apt-get update && sudo apt-get upgrade -y
+
+    # Install packages to allow apt to use a repository over HTTPS
+    sudo apt-get install -y ca-certificates curl gnupg wget git git-flow
+
+    # Shell completions
+    mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
+
+    cat <<EOF >"$HOME/.bash_completion"
+if [ -d "$HOME/.bash_completion.d" ]; then
+    for file in $HOME/.bash_completion.d/*; do
+        . "$file"
+    done
+    unset file
+fi
+EOF
+}
+
+install_terminal() {
+    # Install zsh and zsh-antigen plugin manager
+    sudo apt-get install -y zsh zsh-antigen
+    chsh -s "$(which zsh)"
+
+    # Install kitty terminal
+    sudo apt-get install -y kitty
+    sudo update-alternatives --set x-terminal-emulator "$(which kitty)"
+
+    # Install vim editor
+    sudo apt-get install -y vim
+
+    # Install neovim editor
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    mkdir -p "$HOME/.nvim"
+    mv nvim.appimage "$HOME/.nvim" && chmod u+x "$HOME/.nvim/nvim.appimage"
+    ln -sf "$HOME/.nvim/nvim.appimage" "$HOME/.local/bin/nvim"
+
+    # Install starship prompt theme
+    curl -sS https://starship.rs/install.sh | sh
+
+    # Install zoxide, a smarter cd command
+    sudo apt-get install -y zoxide
+
+    # Install ripgrep, a faster grep
+    sudo apt-get install -y ripgrep
+
+    # Install tldr
+    sudo apt-get install -y tldr
+}
+
+install_fonts() {
+    # Install JetBarins Mono and JetBrains Mono Nerd Font
+    directory="$HOME/.local/share/fonts/nerd-fonts"
+    mkdir -p "$directory"
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -P "$directory"
+    unzip "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
+    rm "$directory/JetBrainsMono.zip"
+    unset directory
+
+    # Install Cascadia Code
+    directory="$HOME/.local/share/fonts"
+    mkdir -p "$directory"
+    wget https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip -P "$directory"
+    unzip "$directory/CascadiaCode-2111.01.zip" -d "$directory/cascadia-code"
+    rm "$directory/CascadiaCode-2111.01.zip"
+    unset directory
+
+    # Reload font cache
+    fc-cache -fv
+}
+
+install_node() {
+    # Install fnm, a node version manager
+    curl -fsSL https://fnm.vercel.app/install | sh
+    reload_shell_path
+    fnm install --lts
+    fnm default --lts
+
+    # Add fnm completions
+    fnm completions --shell bash >"$HOME/.bash_completion.d/_fnm"
+    fnm completions --shell zsh >"$HOME/.zfunc/_fnm"
+
+    # Install pnpm, a node package manager
+    curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+    # Install @angular/cli
+    npm install -g @angular/cli
+}
+
+install_python() {
+    # Install python dependencies
+    sudo apt-get install -y python-is-python3 python3-pip
+
+    # Install poetry
+    curl -sSL https://install.python-poetry.org | python3 -
+    reload_shell_path
+
+    # Install poetry completions
+    poetry completions bash >"$HOME/.bash_completion.d/_poetry"
+    poetry completions zsh >"$HOME/.zfunc/_poetry"
+}
+
+install_java() {
+    # Install java
+    sudo apt-get install -y default-jdk default-jre openjdk-17-jdk openjdk-17-jre
+}
+
+prepare_environment
+install_terminal
+install_fonts
+install_node
+install_python
+install_java
