@@ -1,7 +1,7 @@
 # User path
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # ANTIGEN PLUGIN MANAGER
 source /usr/share/zsh-antigen/antigen.zsh
@@ -33,21 +33,34 @@ alias l='ls -CF'
 alias sshk='kitty +kitten ssh'
 alias icat='kitty +kitten icat'
 alias diffk='kitty +kitten diff'
+alias vim='nvim'
 # alias open='xdg-open'
 
 # yadm alias
 alias yadmsync="yadm add -u && yadm commit && yadm push"
 
 # Load starship prompt
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-eval "$(starship init zsh)"
+if command -v starship &>/dev/null; then
+  export STARSHIP_CONFIG=~/.config/starship/starship.toml
+  eval "$(starship init zsh)"
+fi
 
 # Load zoxide (z command)
-eval "$(zoxide init zsh)"
+if command -v zoxide &>/dev/null; then eval "$(zoxide init zsh)"; fi
 
 # fnm
-export PATH="$HOME/.local/share/fnm:$PATH"
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+if [ -d "$HOME/.local/share/fnm" ]; then
+  export PATH="$HOME/.local/share/fnm:$PATH"
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+fi
 
 # Angular CLI completion
-source <(ng completion script)
+if command -v ng &>/dev/null; then source <(ng completion script); fi
+
+# pnpm
+export PNPM_HOME="/home/javalce/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
