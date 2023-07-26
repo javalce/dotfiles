@@ -3,10 +3,6 @@
 # Install fnm, a node version manager
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
-# Reload path
-# shellcheck source=/dev/null
-. "$HOME/.profile"
-
 fnm install lts-latest
 fnm default lts-latest
 

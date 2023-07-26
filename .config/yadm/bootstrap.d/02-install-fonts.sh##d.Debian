@@ -7,6 +7,7 @@ sudo apt install -y fonts-jetbrains-mono
 directory="$HOME/.local/share/fonts/nerd-fonts"
 mkdir -p "$directory"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -P "$directory"
+if [ -d "$directory/jetbrains-mono" ]; then rm -rf "$directory/jetbrains-mono"; fi
 unzip "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
 rm "$directory/JetBrainsMono.zip"
 unset directory
@@ -15,9 +16,7 @@ unset directory
 directory="$HOME/.local/share/fonts"
 mkdir -p "$directory"
 wget https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip -P "$directory"
+if [ -d "$directory/cascadia-code" ]; then rm -rf "$directory/cascadia-code"; fi
 unzip "$directory/CascadiaCode-2111.01.zip" -d "$directory/cascadia-code"
 rm "$directory/CascadiaCode-2111.01.zip"
 unset directory
-
-# Reload font cache
-fc-cache -fv

@@ -130,7 +130,7 @@ if command -v zoxide &>/dev/null; then eval "$(zoxide init bash)"; fi
 if command -v ng &>/dev/null; then source <(ng completion script); fi
 
 # pnpm
-export PNPM_HOME="/home/javalce/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
 *) export PATH="$PNPM_HOME:$PATH" ;;

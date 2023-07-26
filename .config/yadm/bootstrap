@@ -22,3 +22,6 @@ find -L "$BOOTSTRAP_D" -type f | sort | while IFS= read -r bootstrap; do
         fi
     fi
 done
+
+echo "Bootstrap complete"
+echo "Please log out and log back in to apply all changes"
