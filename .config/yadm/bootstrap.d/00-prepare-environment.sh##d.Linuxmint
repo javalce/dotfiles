@@ -13,9 +13,9 @@ git config --global user.email "javalce29@gmail.com"
 mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
 
 cat <<EOF >"$HOME/.bash_completion"
-if [ -d "$HOME/.bash_completion.d" ]; then
-    for file in $HOME/.bash_completion.d/*; do
-        . "$file"
+if [ -d "\$HOME/.bash_completion.d" ]; then
+    for file in \$HOME/.bash_completion.d/*; do
+        . "\$file"
     done
     unset file
 fi
