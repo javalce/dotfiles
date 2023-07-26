@@ -11,7 +11,7 @@ fnm completions --shell bash >"$HOME/.bash_completion.d/_fnm"
 fnm completions --shell zsh >"$HOME/.zfunc/_fnm"
 
 # Install pnpm, a node package manager
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+npm i -g pnpm
 
 # Install @angular/cli
 npm install -g @angular/cli
