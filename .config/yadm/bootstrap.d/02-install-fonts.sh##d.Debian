@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Install JetBarins Mono font
+sudo apt install -y fonts-jetbrains-mono
+
+# Install JetBrains Mono Nerd Font
+directory="$HOME/.local/share/fonts/nerd-fonts"
+mkdir -p "$directory"
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -P "$directory"
+unzip "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
+rm "$directory/JetBrainsMono.zip"
+unset directory
+
+# Install Cascadia Code font
+directory="$HOME/.local/share/fonts"
+mkdir -p "$directory"
+wget https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip -P "$directory"
+unzip "$directory/CascadiaCode-2111.01.zip" -d "$directory/cascadia-code"
+rm "$directory/CascadiaCode-2111.01.zip"
+unset directory
+
+# Reload font cache
+fc-cache -fv
