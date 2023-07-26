@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Install fnm, a node version manager
-curl -fsSL https://fnm.vercel.app/install | sh - --skip-shell
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
 # Reload path
 # shellcheck source=/dev/null

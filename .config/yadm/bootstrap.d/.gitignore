@@ -1,6 +1,0 @@
-# Ignore symliked files
-
-00-prepare-environment.sh
-01-install-terminal.sh
-02-install-fonts.sh
-04-install-python.sh

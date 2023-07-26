@@ -53,3 +53,11 @@ fi
 
 # Angular CLI completion
 if command -v ng &>/dev/null; then source <(ng completion script); fi
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

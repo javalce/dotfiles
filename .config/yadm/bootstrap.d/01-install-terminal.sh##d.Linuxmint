@@ -17,7 +17,7 @@ mv nvim.appimage "$HOME/.nvim" && chmod u+x "$HOME/.nvim/nvim.appimage"
 ln -sf "$HOME/.nvim/nvim.appimage" "$HOME/.local/bin/nvim"
 
 # Install starship prompt theme
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 
 # Install zoxide, a smarter cd command
 sudo apt-get install -y zoxide
