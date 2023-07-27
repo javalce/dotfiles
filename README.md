@@ -52,6 +52,8 @@ After bootstrap is done, log out and log back in to apply changes
 
 - [fnm](https://github.com/Schniz/fnm) (Fast Node Manager)
 - npm
+- pnpm
+- @angular/cli
 
 ### Python
 
