@@ -18,5 +18,6 @@ fnm completions --shell bash >"$HOME/.bash_completion.d/_fnm"
 fnm completions --shell zsh >"$HOME/.zfunc/_fnm"
 
 # Install global dependencies
+npm install -g npm
 npm install -g pnpm
 npm install -g @angular/cli

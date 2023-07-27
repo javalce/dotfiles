@@ -1,10 +1,5 @@
 #!/bin/sh
 
-if [ "$(id -u)" -ne 0 ]; then
-	echo "Please run as root"
-	exit 1
-fi
-
 install_browsers() {
 	# Install Google Chrome
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
