@@ -5,17 +5,15 @@ Using yadm to manage my dotfiles for [Debian](https://www.debian.org/) and [Linu
 ## Setup
 
 ```bash
-# Backup .bashrc and .profile before running this
-cp ~/.bashrc ~/.bashrc.bak
-cp ~/.profile ~/.profile.bak
-
 # Install yadm and clone this repo
 sudo apt-get install -y yadm
 yadm clone --no-bootstrap 'git@github.com:javalce/dotfiles.git'
 yadm bootstrap
 ```
 
-After bootstrap is done, log out and log back in to apply changes
+The bootstrap command is intended to be run only once in a new system. It will install all dependencies and set up the environment.
+
+After bootstrapping is done, log out and log back in to apply changes.
 
 ## Dependencies and stuff yadm bootstrap installs
 
