@@ -1,13 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # Update system
 sudo apt-get update && sudo apt-get upgrade -y
 
 # Install packages to allow apt to use a repository over HTTPS
 sudo apt-get install -y ca-certificates curl gnupg wget git git-flow unzip tar
-
-git config --global user.name "Javier Valero Cejudo"
-git config --global user.email "javalce29@gmail.com"
 
 # Shell completions
 mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"

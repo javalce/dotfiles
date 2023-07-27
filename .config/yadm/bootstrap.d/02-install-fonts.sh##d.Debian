@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install JetBarins Mono font
 sudo apt install -y fonts-jetbrains-mono

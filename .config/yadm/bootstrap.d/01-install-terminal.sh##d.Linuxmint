@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install zsh and zsh-antigen plugin manager
 sudo apt-get install -y zsh zsh-antigen
