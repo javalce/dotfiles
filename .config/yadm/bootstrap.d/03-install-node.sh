@@ -4,7 +4,7 @@
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
 # Add fnm to path
-export PATH="$HOME/.fnm:$PATH"
+export PATH="$HOME/.local/share/fnm:$PATH"
 
 # Install nodejs
 fnm install lts-latest
