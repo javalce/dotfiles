@@ -1,0 +1,7 @@
+# Untrack bootstrap distro based files symlinks. These are created by yadm
+# and are not needed in the repo.
+00-prepare-enviroment.sh
+01-install-terminal.sh
+02-install-fonts.sh
+04-install-python.sh
+05-install-docker.sh
