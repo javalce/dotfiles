@@ -3,8 +3,9 @@
 # Install fnm, a node version manager
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 
-# Add fnm to PATH
-export PATH="$HOME/.local/share/fnm:$PATH"
+# Reload path
+# shellcheck source=/dev/null
+source "$HOME/.bashrc"
 
 # Install nodejs
 fnm install lts-latest
