@@ -8,6 +8,11 @@ Using yadm to manage my dotfiles for [Debian](https://www.debian.org/) and [Linu
 # Install yadm and clone this repo
 sudo apt-get install -y yadm
 yadm clone --no-bootstrap 'git@github.com:javalce/dotfiles.git'
+
+# Checkout the files
+yadm checkout "$HOME"
+
+# Bootstrap the system
 yadm bootstrap
 ```
 
