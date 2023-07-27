@@ -14,3 +14,5 @@ $poetry config virtualenvs.in-project true
 # Install poetry completions
 $poetry completions bash >"$HOME/.bash_completion.d/_poetry"
 $poetry completions zsh >"$HOME/.zfunc/_poetry"
+
+unset poetry
