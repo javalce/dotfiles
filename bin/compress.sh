@@ -9,7 +9,17 @@ documentos="$HOME/Documentos"
 dev="$HOME/Dev"
 
 # Clean tmp directories
-tmp_files=('node_modules' '.angular' 'dist' '.next' '.ruff_cache' '.mypy_cache' '.pytest_cache' '__pycache__')
+tmp_files=(
+    'node_modules'
+    '.angular'
+    'dist'
+    '.next'
+    '.venv'
+    '.ruff_cache'
+    '.mypy_cache'
+    '.pytest_cache'
+    '__pycache__'
+)
 for tmp_file in "${tmp_files[@]}"; do
     find "$documentos" -name "$tmp_file" -type d -prune -exec rm -rf '{}' \;
     find "$dev" -name "$tmp_file" -type d -prune -exec rm -rf '{}' \;
