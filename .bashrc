@@ -128,3 +128,5 @@ if command -v zoxide &>/dev/null; then eval "$(zoxide init bash)"; fi
 
 # Angular CLI completion
 if command -v ng &>/dev/null; then source <(ng completion script); fi
+
+PATH=~/.console-ninja/.bin:$PATH
