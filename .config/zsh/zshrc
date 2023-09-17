@@ -1,11 +1,14 @@
 export BIN_PATH="$HOME/.local/bin:$HOME/bin"
 case ":$PATH:" in
-  *":$BIN_PATH:"*) ;;
-  *) export PATH="$BIN_PATH:$PATH" ;;
+*":$BIN_PATH:"*) ;;
+*) export PATH="$BIN_PATH:$PATH" ;;
 esac
 unset BIN_PATH
+fpath+=(~/.zfunc)
 
 export EDITOR="nvim"
+
+ZSH_HOME="$HOME/.config/zsh"
 
 source /usr/share/zsh-antigen/antigen.zsh
 
@@ -22,35 +25,8 @@ zsh-users/zsh-autosuggestions
 EOBUNDLES
 antigen apply
 
-fpath+=( ~/.zfunc )
-
-source ~/.config/zsh/aliases.zsh
-
-# Load starship prompt
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-eval "$(starship init zsh)"
-
-# Load zoxide (z command)
-eval "$(zoxide init zsh)"
-
-# fnm
-export FNM_HOME="$HOME/.local/share/fnm"
-case ":$PATH:" in
-  *":$FNM_HOME:"*);;
-  *)
-    export PATH="$FNM_HOME:$PATH"
-    eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-    ;;
-esac
-unset FNM_HOME
-
-# pnpm
-export PNPM_HOME="/home/javalce/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# Angular CLI completion
-source <(ng completion script)
+source ${ZSH_HOME}/plugins/starship.zsh
+source ${ZSH_HOME}/plugins/zoxide.zsh
+source ${ZSH_HOME}/plugins/fnm.zsh
+source ${ZSH_HOME}/plugins/pnpm.zsh
+source ${ZSH_HOME}/plugins/aliases.zsh
