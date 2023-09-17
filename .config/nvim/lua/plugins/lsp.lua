@@ -14,6 +14,7 @@ return {
         dockerls = {},
         docker_compose_language_service = {},
         html = {},
+        intelephense = {},
         yamlls = {},
         pyright = {
           before_init = function(_, config)
@@ -41,6 +42,7 @@ return {
         "shfmt",
         "black",
         "prettier",
+        "php-cs-fixer",
       },
     },
   },
@@ -70,6 +72,7 @@ return {
           }),
           formatters.ruff,
           formatters.prettier,
+          formatters.phpcsfixer,
 
           -- code actions
           require("typescript.extensions.null-ls.code-actions"),
