@@ -13,16 +13,14 @@ ZSH_HOME="$HOME/.config/zsh"
 source /usr/share/zsh-antigen/antigen.zsh
 
 antigen use oh-my-zsh
-antigen bundles <<EOBUNDLES
-colored-man-pages
-command-not-found
-copybuffer
-copyfile
-git
-git-flow-avh
-zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-autosuggestions
-EOBUNDLES
+antigen bundle colored-man-pages
+antigen bundle command-not-found
+antigen bundle copybuffer
+antigen bundle copyfile
+antigen bundle git
+antigen bundle git-flow-avh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
 source ${ZSH_HOME}/plugins/starship.zsh
