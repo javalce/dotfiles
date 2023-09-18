@@ -1,3 +1,6 @@
+############################################
+# Set custom paths and env vars
+############################################
 export BIN_PATH="$HOME/.local/bin:$HOME/bin"
 case ":$PATH:" in
 *":$BIN_PATH:"*) ;;
@@ -5,24 +8,41 @@ case ":$PATH:" in
 esac
 unset BIN_PATH
 fpath+=(~/.zfunc)
-
 export EDITOR="nvim"
-
 ZSH_HOME="$HOME/.config/zsh"
 
-source /usr/share/zsh-antigen/antigen.zsh
+############################################
+# Configure antidote options
+############################################
+zstyle ':antidote:bundle' use-friendly-names 'yes'
+zstyle ':omz:update' mode reminder
+zstyle ':omz:lib:directories' aliases no
+zstyle ':omz:lib:misc' aliases no
 
-antigen use oh-my-zsh
-antigen bundle colored-man-pages
-antigen bundle command-not-found
-antigen bundle copybuffer
-antigen bundle copyfile
-antigen bundle git
-antigen bundle git-flow-avh
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen apply
+############################################
+# Load antidote
+############################################
+# Set the name of the static .zsh plugins file antidote will generate.
+zsh_plugins=${ZSH_HOME}/zsh_plugins.zsh
 
+# Ensure you have a zsh_plugins.txt file where you can add plugins.
+[[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
+
+# Lazy-load antidote.
+fpath+=(${ZSH_HOME}/antidote)
+autoload -Uz $fpath[-1]/antidote
+
+# Generate static file in a subshell when zsh_plugins.txt is updated.
+if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
+  (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
+fi
+
+# Source your static plugins file.
+source $zsh_plugins
+
+############################################
+# Load custom
+############################################
 source ${ZSH_HOME}/plugins/starship.zsh
 source ${ZSH_HOME}/plugins/zoxide.zsh
 source ${ZSH_HOME}/plugins/fnm.zsh
