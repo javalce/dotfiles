@@ -41,7 +41,7 @@ fi
 source $zsh_plugins
 
 ############################################
-# Load custom
+# Load custom plugins
 ############################################
 source ${ZSH_HOME}/plugins/starship.zsh
 source ${ZSH_HOME}/plugins/zoxide.zsh
