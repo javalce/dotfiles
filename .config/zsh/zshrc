@@ -10,7 +10,6 @@ unset BIN_PATH
 fpath+=(~/.zfunc)
 export EDITOR="nvim"
 ZSH_HOME="$HOME/.config/zsh"
-
 ############################################
 # Configure antidote options
 ############################################
@@ -18,33 +17,34 @@ zstyle ':antidote:bundle' use-friendly-names 'yes'
 zstyle ':omz:update' mode reminder
 zstyle ':omz:lib:directories' aliases no
 zstyle ':omz:lib:misc' aliases no
-
 ############################################
 # Load antidote
 ############################################
 # Set the name of the static .zsh plugins file antidote will generate.
 zsh_plugins=${ZSH_HOME}/zsh_plugins.zsh
-
 # Ensure you have a zsh_plugins.txt file where you can add plugins.
 [[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
-
 # Lazy-load antidote.
 fpath+=(${ZSH_HOME}/antidote)
 autoload -Uz $fpath[-1]/antidote
-
 # Generate static file in a subshell when zsh_plugins.txt is updated.
 if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
   (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
 fi
-
 # Source your static plugins file.
 source $zsh_plugins
-
+############################################
+# STARSHIP PROMPT
+############################################
+export STARSHIP_CONFIG="$HOME/config/starship/starship.toml"
+eval "$(starship init zsh)"
+############################################
+# ZOXIDE
+############################################
+eval "$(zoxide init zsh)"
 ############################################
 # Load custom plugins
 ############################################
-source ${ZSH_HOME}/plugins/starship.zsh
-source ${ZSH_HOME}/plugins/zoxide.zsh
 source ${ZSH_HOME}/plugins/fnm.zsh
 source ${ZSH_HOME}/plugins/pnpm.zsh
 source ${ZSH_HOME}/plugins/aliases.zsh

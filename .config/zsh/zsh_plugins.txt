@@ -7,4 +7,3 @@ ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/git-flow-avh
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-autosuggestions
-
