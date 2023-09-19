@@ -36,7 +36,7 @@ source $zsh_plugins
 ############################################
 # STARSHIP PROMPT
 ############################################
-export STARSHIP_CONFIG="$HOME/config/starship/starship.toml"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 ############################################
 # ZOXIDE
