@@ -4,6 +4,7 @@ install_browsers() {
 	# Install Google Chrome
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+	rm google-chrome-stable_current_amd64.deb
 
 	# Install Brave Browser
 	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -40,8 +41,6 @@ Terminal=false
 Type=Application
 Categories=Development;
 EOF
-
-	unset FILENAME OPT OPT_BIN BIN DESKTOP_FILE
 }
 
 install_database_tools() {
