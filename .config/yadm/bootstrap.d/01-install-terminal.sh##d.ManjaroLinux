@@ -2,7 +2,7 @@
 
 # Install zsh and zsh antidote plugin manager
 sudo pacman -S zsh --noconfirm
-sudo pamac install zsh-antidote --no-confirm
+git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.config/zsh/antidote
 ln -sf ~/.config/zsh/zshrc ~/.zshrc
 
 # Install kitty terminal
