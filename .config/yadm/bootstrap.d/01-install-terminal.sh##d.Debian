@@ -2,6 +2,7 @@
 
 # Install zsh and zsh-antigen plugin manager
 sudo apt-get install -y zsh zsh-antigen
+ln -sf ~/.config/zsh/zshrc ~/.zshrc
 
 # Install kitty terminal
 sudo apt-get install -y kitty
