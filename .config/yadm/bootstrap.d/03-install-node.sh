@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install fnm, a node version manager
-curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell --install-dir "$HOME/.local/share"
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell --install-dir "$HOME/.local/share/fnm"
 
 # Add fnm to path
 export PATH="$HOME/.local/share/fnm:$PATH"
