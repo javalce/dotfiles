@@ -1,5 +1,9 @@
 return {
   {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000,
+  },
+  {
     "catppuccin/nvim",
     lazy = false,
     name = "catppuccin",
@@ -38,7 +42,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "onedark_vivid",
     },
   },
 }

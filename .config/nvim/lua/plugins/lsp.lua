@@ -49,7 +49,7 @@ return {
 
   -- Diagnostics, code actions and more
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     opts = function()
       local nls = require("null-ls")
       local diagnostics = nls.builtins.diagnostics
@@ -75,7 +75,7 @@ return {
           formatters.phpcsfixer,
 
           -- code actions
-          require("typescript.extensions.null-ls.code-actions"),
+          -- require("typescript.extensions.null-ls.code-actions"),
         },
       }
     end,

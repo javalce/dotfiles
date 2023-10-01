@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install fnm, a node version manager
-curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell --install-dir "$HOME/.local/share"
 
 # Add fnm to path
 export PATH="$HOME/.local/share/fnm:$PATH"
@@ -17,7 +17,11 @@ eval "$(fnm env)"
 fnm completions --shell bash >"$HOME/.bash_completion.d/_fnm"
 fnm completions --shell zsh >"$HOME/.zfunc/_fnm"
 
-# Install global dependencies
+# Update npm version
 npm install -g npm
-npm install -g pnpm
+
+# Install global dependencies
 npm install -g @angular/cli
+
+# Install pnpm
+curl -fsSL https://get.pnpm.io/install.sh | sh -
