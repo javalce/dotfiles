@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Install zsh and zsh antidote plugin manager
+sudo pacman -S zsh --noconfirm
+sudo pamac install zsh-antidote --no-confirm
+
+# Install kitty terminal
+sudo pacman -S --noconfirm kitty
+
+# Install vim and neovim editor
+sudo pacman -S vim neovim --noconfirm
+
+# Install starship prompt theme
+sudo pacman -S starship --noconfirm
+
+# Install zoxide, a smarter cd command
+sudo pacman -S --noconfirm zoxide
+
+# Install ripgrep, a faster grep
+sudo pacman -S --noconfirm ripgrep
+
+# Install tldr
+sudo pacman -S --noconfirm tldr
