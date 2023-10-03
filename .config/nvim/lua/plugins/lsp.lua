@@ -4,25 +4,37 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
-      ---@type lspconfig.options
       servers = {
         angularls = {},
         ansiblels = {},
         astro = {},
         bashls = {},
         cssls = {},
-        dockerls = {},
-        docker_compose_language_service = {},
+        -- dockerls = {},
+        -- docker_compose_language_service = {},
+        -- eslint = {},
         html = {},
         intelephense = {},
         yamlls = {},
-        pyright = {
-          before_init = function(_, config)
-            local util = require("util")
-            config.settings.python.pythonPath = util.get_python_path(config.root_dir)
-          end,
-        },
+        -- pyright = {
+        --   before_init = function(_, config)
+        --     local util = require("util")
+        --     print(util.get_python_path(config.root_dir))
+        --     config.settings.python.pythonPath = util.get_python_path(config.root_dir)
+        --   end,
+        -- },
         taplo = {},
+      },
+      setup = {
+        eslint = function()
+          require("lazyvim.util").on_attach(function(client)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormatingProvider = true
+            elseif client.name == "tsserver" then
+              client.server_capabilities.documentFormatingProvider = false
+            end
+          end)
+        end,
       },
     },
   },
@@ -35,13 +47,12 @@ return {
         -- linters
         "shellcheck",
         "mypy",
-        "ruff",
 
         -- formatters
+        "ruff",
         "stylua",
         "shfmt",
         "black",
-        "prettier",
         "php-cs-fixer",
       },
     },
@@ -59,10 +70,10 @@ return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
           -- diagnostics
-          diagnostics.mypy.with({
-            prefer_local = ".venv/bin",
-          }),
-          diagnostics.ruff,
+          -- diagnostics.mypy.with({
+          --   prefer_local = ".venv/bin",
+          -- }),
+          diagnostics.mypy,
 
           -- formatters
           formatters.stylua,
@@ -71,11 +82,9 @@ return {
             prefer_local = ".venv/bin",
           }),
           formatters.ruff,
-          formatters.prettier,
           formatters.phpcsfixer,
 
           -- code actions
-          -- require("typescript.extensions.null-ls.code-actions"),
         },
       }
     end,
