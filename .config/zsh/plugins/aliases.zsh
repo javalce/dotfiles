@@ -1,3 +1,6 @@
+alias ls='exa'
+alias cat='batcat'
+
 # some more ls aliases
 alias ll='ls -alh'
 alias la='ls -Alh'

@@ -4,25 +4,14 @@
 
 local Util = require("lazyvim.util")
 
-local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= false
-    if opts.remap and not vim.g.vscode then
-      opts.remap = nil
-    end
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+local function map(mode, lhs, rhs)
+  vim.keymap.set(mode, lhs, rhs, { silent = true })
 end
 
--- Use tabs to change buffer
 if Util.has("bufferline.nvim") then
-  map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
-  map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+  map("n", "<tab>", "<cmd>BufferLineCycleNext<cr>")
+  map("n", "<s-tab>", "<cmd>BufferLineCyclePrev<cr>")
 else
-  map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-  map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+  map("n", "<tab>", "<cmd>bnext<cr>")
+  map("n", "<s-tab>", "<cmd>bprevious<cr>")
 end
