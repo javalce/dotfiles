@@ -1,4 +1,3 @@
-alias ls='exa'
 alias cat='batcat'
 
 # some more ls aliases
