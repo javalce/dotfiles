@@ -1,0 +1,12 @@
+configuration {
+	font:							"JetBrainsMono Nerd Font 12";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    display-drun: 					"";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+	sidebar-mode: 					true;
+    modi:                           "drun";
+}
+
+@theme "style.rasi"
