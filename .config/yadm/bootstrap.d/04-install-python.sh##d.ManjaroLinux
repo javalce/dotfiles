@@ -1,15 +1,11 @@
 #!/bin/bash
 
-poetry="$HOME/.local/bin/poetry"
-
 # Install python dependencies
-sudo pacman -S --noconfirm python3-pip
+sudo pacman -S --noconfirm python3-pip python-pipx
 
 # Install poetry
-curl -sSL https://install.python-poetry.org | python3 -
+pipx install poetry
 
 # Install poetry completions
-$poetry completions bash >"$HOME/.bash_completion.d/_poetry"
-$poetry completions zsh >"$HOME/.zfunc/_poetry"
-
-unset poetry
+poetry completions bash >"$HOME/.bash_completion.d/_poetry"
+poetry completions zsh >"$HOME/.zfunc/_poetry"

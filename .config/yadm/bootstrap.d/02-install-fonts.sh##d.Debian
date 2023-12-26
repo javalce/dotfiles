@@ -6,7 +6,7 @@ sudo apt install -y fonts-jetbrains-mono
 # Install JetBrains Mono Nerd Font
 directory="$HOME/.local/share/fonts/nerd-fonts"
 mkdir -p "$directory"
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip -P "$directory"
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip -P "$directory"
 if [ -d "$directory/jetbrains-mono" ]; then rm -rf "$directory/jetbrains-mono"; fi
 unzip "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
 rm "$directory/JetBrainsMono.zip"
