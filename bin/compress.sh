@@ -2,11 +2,14 @@
 
 set -euo pipefail
 
-descargas="$HOME/Descargas"
-imagenes="$HOME/Imágenes"
-videos="$HOME/Vídeos"
-documentos="$HOME/Documentos"
-dev="$HOME/Dev"
+descargas="Descargas"
+imagenes="Imágenes"
+videos="Vídeos"
+documentos="Documentos"
+dev="Dev"
+
+# Go to home directory
+cd "$HOME"
 
 # Clean tmp directories
 tmp_files=(
