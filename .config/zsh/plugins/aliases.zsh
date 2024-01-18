@@ -1,4 +1,4 @@
-alias cat='batcat'
+alias cat='bat'
 
 # some more ls aliases
 alias ll='ls -alh'
