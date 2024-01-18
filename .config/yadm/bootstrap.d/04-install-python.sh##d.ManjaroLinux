@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install python dependencies
-sudo pacman -S --noconfirm python3-pip python-pipx
+sudo pacman -S --noconfirm python-pip python-pipx
 
 # Install poetry
 pipx install poetry
