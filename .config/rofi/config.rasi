@@ -9,4 +9,5 @@ configuration {
     modi:                           "drun";
 }
 
-@theme "style.rasi"
+@theme "spotlight-dark.rasi"
+
