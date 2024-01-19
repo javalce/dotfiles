@@ -16,7 +16,8 @@
     fg1:    #FFFFFF;
     fg2:    #DEDEDE80;
 
-    background-color:   transparent;
+    //background-color:   transparent;
+    background-color:   @bg0;
     text-color:         @fg0;
 
     margin:     0;
@@ -30,10 +31,13 @@ window {
     location:       center;
     width:          640;
     border-radius:  8;
+    transparency: "real";
+    cursor: "default";
 }
 
 inputbar {
-    font:       "Montserrat 20";
+    //font:       "Montserrat 20";
+    font:   "JetBrainsMono Nerd Font 12";
     padding:    12px;
     spacing:    12px;
     children:   [ icon-search, entry ];
@@ -73,16 +77,19 @@ listview {
     fixed-height:   false;
     border:         1px 0 0;
     border-color:   @bg1;
+    background-color: transparent;
 }
 
 element {
     padding:            8px 16px;
     spacing:            16px;
     background-color:   transparent;
+    text-color:         @fg1;
 }
 
 element normal active {
     text-color: @bg2;
+    background-color: @bg2;
 }
 
 element selected normal, element selected active {
@@ -92,8 +99,16 @@ element selected normal, element selected active {
 
 element-icon {
     size:   1em;
+    background-color: transparent;
+    text-color: inherit;
+    highlight: inherit;
+    cursor: inherit;
 }
 
 element-text {
     text-color: inherit;
+    background-color: transparent;
+    highlight: inherit;
+    cursor: inherit;
 }
+
