@@ -6,12 +6,16 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- config.font = wezterm.font({ family = "JetBrains Mono", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
-config.font =
-	wezterm.font({ family = "CaskaydiaCove Nerd Font Mono", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
+config.font = wezterm.font({
+	family = "JetBrains Mono",
+	weight = "DemiBold",
+	harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
+})
+-- config.font =
+-- 	wezterm.font({ family = "CaskaydiaCove Nerd Font Mono", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
 -- config.font = wezterm.font({ family = "Cascadia Code", harfbuzz_features = { "calt=1", "clig=1", "liga=1" } })
 config.font_size = 12
-config.bold_brightens_ansi_colors = false
+config.bold_brightens_ansi_colors = true
 config.freetype_load_target = "Normal"
 config.color_scheme = "GNOME"
 -- config.color_scheme = "TokyoNight"
@@ -47,7 +51,7 @@ config.color_scheme = "GNOME"
 -- 	},
 -- }
 config.enable_tab_bar = true
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 config.audible_bell = "Disabled"
 config.window_padding = {
 	left = 0,
