@@ -1,6 +1,6 @@
 # dotfiles
 
-Using yadm to manage my dotfiles for [Debian](https://www.debian.org/) and [Linux Mint](https://linuxmint.com/).
+Using yadm to manage my dotfiles for [Debian](https://www.debian.org/), [Linux Mint](https://linuxmint.com/) and [Manjaro](https://manjaro.org/).
 
 ## Setup
 
@@ -39,7 +39,7 @@ After bootstrapping is done, log out and log back in to apply changes.
 - zsh-antigen
 - kitty (also sets as default terminal)
 - vim
-- neovim (installed as appimage)
+- neovim (installed as appimage in Debian and Linux Mint, instelled from repository in Manjaro)
 - [starsip prompt](https://starship.rs/)
 - zoxide
 - ripgrep
