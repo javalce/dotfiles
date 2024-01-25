@@ -43,8 +43,27 @@ eval "$(starship init zsh)"
 ############################################
 eval "$(zoxide init zsh)"
 ############################################
+# FNM (Fast Node Manager)
+############################################
+export FNM_DIR="$HOME/.local/share/fnm"
+case ":$PATH:" in
+*":$FNM_DIR:"*) ;;
+*)
+    export PATH="$FNM_DIR:$PATH"
+    eval "$(fnm env --use-on-cd)"
+    ;;
+esac
+############################################
+# PNPM package manager
+############################################
+export PNPM_HOME="/home/javalce/.local/share/pnpm"
+case ":$PATH:" in
+*":$PNPM_HOME:"*) ;;
+*)
+    export PATH="$PNPM_HOME:$PATH"
+    ;;
+esac
+############################################
 # Load custom plugins
 ############################################
-source ${ZSH_HOME}/plugins/fnm.zsh
-source ${ZSH_HOME}/plugins/pnpm.zsh
 source ${ZSH_HOME}/plugins/aliases.zsh
