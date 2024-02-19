@@ -11,5 +11,10 @@ return {
         desc = "Focus NeoTree (cwd dir)",
       },
     },
+    opts = {
+      window = {
+        position = "right",
+      },
+    },
   },
 }
