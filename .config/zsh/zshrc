@@ -1,81 +1,72 @@
-############################################
-# Set custom paths and env vars
-############################################
-export BIN_PATH="$HOME/.local/bin:$HOME/bin"
-case ":$PATH:" in
-*":$BIN_PATH:"*) ;;
-*) export PATH="$BIN_PATH:$PATH" ;;
-esac
-unset BIN_PATH
-fpath+=(~/.zfunc)
-export EDITOR="nvim"
 ZSH_HOME="$HOME/.config/zsh"
-############################################
-# Configure antidote options
-############################################
-zstyle ':antidote:bundle' use-friendly-names 'yes'
-zstyle ':omz:update' mode reminder
-zstyle ':omz:lib:directories' aliases no
-zstyle ':omz:lib:misc' aliases no
-############################################
-# Load antidote
-############################################
-# Set the name of the static .zsh plugins file antidote will generate.
-zsh_plugins=${ZSH_HOME}/zsh_plugins.zsh
-# Ensure you have a zsh_plugins.txt file where you can add plugins.
-[[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
-# Lazy-load antidote.
-fpath+=(${ZSH_HOME}/antidote)
-autoload -Uz $fpath[-1]/antidote
-# Generate static file in a subshell when zsh_plugins.txt is updated.
-if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
-  (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
+
+ZIM_HOME="$ZSH_HOME/zim"
+ZIM_CONFIG_FILE="$ZSH_HOME/zimrc"
+
+zstyle ':zim:termtitle' format '%1~'
+
+# Download zimfw plugin manager if missing
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
-# Source your static plugins file.
-source $zsh_plugins
-############################################
-# STARSHIP PROMPT
-############################################
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# Initialize modules
+source ${ZIM_HOME}/init.zsh
+
+# Initialize custom plugins
+source ${ZSH_HOME}/plugins/javalce.plugin.zsh
+
+# Initialize starship
+if [[ $TERM_PROGRAM == "WarpTerminal" ]]; then
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship_warp.toml"
+else
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+fi
 eval "$(starship init zsh)"
-############################################
-# ZOXIDE
-############################################
+
+# Initialize zoxide
 eval "$(zoxide init zsh)"
-############################################
+
 # FNM (Fast Node Manager)
-############################################
 export FNM_DIR="$HOME/.local/share/fnm"
 case ":$PATH:" in
 *":$FNM_DIR:"*) ;;
 *)
-    export PATH="$FNM_DIR:$PATH"
-    eval "$(fnm env --use-on-cd)"
-    ;;
+  export PATH="$FNM_DIR:$PATH"
+  eval "$(fnm env --use-on-cd)"
+  ;;
 esac
-############################################
-# PNPM package manager
-############################################
+
+# pnpm
 export PNPM_HOME="/home/javalce/.local/share/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
-*)
-    export PATH="$PNPM_HOME:$PATH"
-    ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-############################################
-# Load custom plugins
-############################################
-source ${ZSH_HOME}/plugins/aliases.zsh
+# pnpm end
 
-############################################
-# Bun package manager
-############################################
 # bun completions
-[ -s "/home/javalce/.bun/_bun" ] && source "/home/javalce/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+case ":$PATH:" in
+*":$BUN_INSTALL/bin:"*) ;;
+*) export PATH="$BUN_INSTALL/bin:$PATH" ;;
+esac
+
+# console-ninja
+case ":$PATH:" in
+*":$HOME/.console-ninja/.bin:"*) ;;
+*) export PATH="$HOME/.console-ninja/.bin:$PATH" ;;
+esac
 
 PATH=~/.console-ninja/.bin:$PATH
+# bun completions
+[ -s "/home/javalce/.local/share/reflex/bun/_bun" ] && source "/home/javalce/.local/share/reflex/bun/_bun"
