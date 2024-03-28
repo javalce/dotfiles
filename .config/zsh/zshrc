@@ -5,6 +5,8 @@ ZIM_CONFIG_FILE="$ZSH_HOME/zimrc"
 
 zstyle ':zim:termtitle' format '%1~'
 
+fpath+=(~/.zfunc)
+
 # Download zimfw plugin manager if missing
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
