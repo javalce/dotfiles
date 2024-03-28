@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Install zsh and zsh antidote plugin manager
+# Install zsh
 sudo pacman -S zsh --noconfirm
-git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.config/zsh/antidote
 ln -sf ~/.config/zsh/zshrc ~/.zshrc
 
 # Install kitty terminal
