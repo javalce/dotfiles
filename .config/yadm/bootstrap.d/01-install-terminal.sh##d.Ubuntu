@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Install zsh and zsh-antigen plugin manager
+sudo apt-get install -y zsh zsh-antigen
+git clone --depth=1 https://github.com/mattmc3/antidote.git ~/.config/zsh/antidote
+ln -sf ~/.config/zsh/zshrc ~/.zshrc
+
+# Install kitty terminal
+sudo apt-get install -y kitty
+sudo update-alternatives --set x-terminal-emulator "$(which kitty)"
+
+# Install vim editor
+sudo apt-get install -y vim
+
+# Install neovim editor
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+mkdir -p "$HOME/.nvim"
+mv nvim.appimage "$HOME/.nvim" && chmod u+x "$HOME/.nvim/nvim.appimage"
+ln -sf "$HOME/.nvim/nvim.appimage" "$HOME/.local/bin/nvim"
+
+# Install starship prompt theme
+curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
+
+# Install zoxide, a smarter cd command
+sudo apt-get install -y zoxide
+
+# Install ripgrep, a faster grep
+sudo apt-get install -y ripgrep
+
+# Install tldr
+sudo apt-get install -y tldr
