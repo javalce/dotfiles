@@ -1,13 +1,13 @@
 # dotfiles
 
-Using yadm to manage my dotfiles for [Debian](https://www.debian.org/), [Linux Mint](https://linuxmint.com/) and [Manjaro](https://manjaro.org/).
+Using yadm to manage my dotfiles for [Debian](https://www.debian.org/), [Linux Mint](https://linuxmint.com/), [Ubuntu](https://ubuntu.com) and [Manjaro](https://manjaro.org/).
 
 ## Setup
 
 ```bash
 # Install yadm and clone this repo
 sudo apt-get install -y yadm
-yadm clone --no-bootstrap 'git@github.com:javalce/dotfiles.git'
+yadm clone --no-bootstrap git@github.com:javalce/dotfiles.git
 
 # Checkout the files
 yadm checkout "$HOME"
@@ -36,10 +36,10 @@ After bootstrapping is done, log out and log back in to apply changes.
 ### Terminal
 
 - zsh
-- zsh-antigen
+- [zimfw](https://zimfw.sh)
 - kitty (also sets as default terminal)
 - vim
-- neovim (installed as appimage in Debian and Linux Mint, instelled from repository in Manjaro)
+- neovim
 - [starsip prompt](https://starship.rs/)
 - zoxide
 - ripgrep
@@ -47,9 +47,9 @@ After bootstrapping is done, log out and log back in to apply changes.
 
 ### Fonts
 
-- JetBrains Mono (installed through apt)
+- JetBrains Mono (installed through repo)
 - JetBrains Mono Nerd Font (installed in ~/.local/share/fonts)
-- Cascadia Code (installed through apt if available or in ~/.local/share/fonts)
+- Cascadia Code (installed through repo if available or in ~/.local/share/fonts)
 
 ### Node
 
@@ -61,7 +61,8 @@ After bootstrapping is done, log out and log back in to apply changes.
 ### Python
 
 - python-is-python3 (you can use python3 as python)
-- python3-pip
+- pip
+- pipx
 - [poetry](https://python-poetry.org)
 
 ### Docker
