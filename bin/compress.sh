@@ -22,6 +22,8 @@ tmp_files=(
     '.mypy_cache'
     '.pytest_cache'
     '__pycache__'
+    'htmlcov'
+    '.coverage'
 )
 for tmp_file in "${tmp_files[@]}"; do
     find "$documentos" -name "$tmp_file" -type d -prune -exec rm -rf '{}' \;
