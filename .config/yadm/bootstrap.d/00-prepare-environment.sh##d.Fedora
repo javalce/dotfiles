@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Update system
+sudo dnf update -y
+
+# Install packages to allow apt to use a repository over HTTPS
+sudo dnf install -y ca-certificates curl gnupg wget git unzip tar
+
+# Install gitflow
+sudo dnf copr enable elegos/gitflow
+sudo dnf install -y gitflow
+
+# Shell completions
+mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
+
+cat <<EOF >"$HOME/.bash_completion"
+if [ -d "\$HOME/.bash_completion.d" ]; then
+    for file in \$HOME/.bash_completion.d/*; do
+        . "\$file"
+    done
+    unset file
+fi
+EOF

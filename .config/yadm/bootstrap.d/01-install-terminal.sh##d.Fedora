@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Install zsh
+sudo dnf install -y zsh
+ln -sf ~/.config/zsh/zshrc ~/.zshrc
+
+# Install kitty terminal
+sudo dnf install -y kitty
+
+# Install vim and neovim editor
+sudo dnf install -y vim neovim
+
+# Install starship prompt theme
+curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
+
+# Install zoxide, a smarter cd command
+sudo dnf install -y zoxide
+
+# Install ripgrep, a faster grep
+sudo dnf install -y ripgrep
+
+# Install tldr
+sudo dnf install -y tealdeer
