@@ -1,3 +1,5 @@
+export EDITOR="nvim"
+
 ZSH_HOME="$HOME/.config/zsh"
 
 ZIM_HOME="$ZSH_HOME/zim"
@@ -63,12 +65,6 @@ case ":$PATH:" in
 *) export PATH="$BUN_INSTALL/bin:$PATH" ;;
 esac
 
-# console-ninja
-case ":$PATH:" in
-*":$HOME/.console-ninja/.bin:"*) ;;
-*) export PATH="$HOME/.console-ninja/.bin:$PATH" ;;
-esac
-
-PATH=~/.console-ninja/.bin:$PATH
-# bun completions
-[ -s "/home/javalce/.local/share/reflex/bun/_bun" ] && source "/home/javalce/.local/share/reflex/bun/_bun"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
