@@ -7,7 +7,7 @@ sudo dnf update -y
 sudo dnf install -y ca-certificates curl gnupg wget git unzip tar
 
 # Install gitflow
-sudo dnf copr enable elegos/gitflow
+sudo dnf copr enable elegos/gitflow -y
 sudo dnf install -y gitflow
 
 # Shell completions

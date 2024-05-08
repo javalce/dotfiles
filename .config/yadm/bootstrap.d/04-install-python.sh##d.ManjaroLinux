@@ -6,8 +6,8 @@ sudo pacman -S --noconfirm python-pip python-pipx
 # Install poetry
 pipx install poetry
 
-# Reload shell to update path
-source "$HOME/.bashrc"
+# Add poetry to PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Install poetry completions
 poetry completions bash >"$HOME/.bash_completion.d/_poetry"
