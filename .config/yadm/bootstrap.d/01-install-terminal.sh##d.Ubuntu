@@ -6,7 +6,6 @@ ln -sf ~/.config/zsh/zshrc ~/.zshrc
 
 # Install kitty terminal
 sudo apt-get install -y kitty
-sudo update-alternatives --set x-terminal-emulator "$(which kitty)"
 
 # Install vim and neovim editor
 sudo apt-get install -y vim neovim
