@@ -2,23 +2,80 @@
 
 set -euo pipefail
 
-REPO="https://github.com/javalce/dotfiles.git"
+SSH=
+REPO=
+BACKUP_FILES=(
+    "$HOME/.bashrc"
+    "$HOME/.profile"
+    "$HOME/.zshrc"
+)
 
-# Backup some files
-backup_file() {
-    if [ -f "$1" ]; then
-        cp "$1" "$1.bak"
+parse_args() {
+
+    while [[ $# -gt 0 ]]; do
+        key="$1"
+        case $key in
+        --ssh)
+            SSH="true"
+            shift
+            ;;
+        *)
+            echo "Unrecognized argument $key"
+            exit 1
+            ;;
+        esac
+    done
+}
+
+set_repo() {
+    if [ "$SSH" == "true" ]; then
+        REPO="git@github.com:javalce/dotfiles.git"
+    else
+        REPO="https://github.com/javalce/dotfiles.git"
     fi
 }
-backup_file "$HOME/.bashrc"
-backup_file "$HOME/.profile"
-backup_file "$HOME/.zshrc"
 
-# Clone the repository
-yadm clone --no-bootstrap "$REPO"
+check_dependencies() {
+    echo "Checking dependencies for the setup script..."
+    SHOULD_EXIT=
 
-# Checkout the repository
-yadm checkout "$HOME"
+    echo -n "Checking availability of yadm... "
+    if hash yadm 2>/dev/null; then
+        echo "OK!"
+    else
+        echo "Missing"
+        SHOULD_EXIT="true"
+    fi
 
-# Bootstrap the repository
-yadm bootstrap
+    if [ "$SHOULD_EXIT" == "true" ]; then
+        echo "Not running the setup script due to missing dependencies."
+        exit 1
+    fi
+}
+
+backup_files() {
+    echo "Backing up files..."
+    for file in "${BACKUP_FILES[@]}"; do
+        if [ -f "$file" ]; then
+            backup_file="$file.bak"
+            echo "Backing up $file to $backup_file"
+            cp "$file" "$backup_file"
+        fi
+    done
+}
+
+bootstrap() {
+    echo "Cloning the repository $REPO..."
+    yadm clone --no-bootstrap "$REPO"
+
+    yadm checkout "$HOME"
+
+    echo "Bootstrapping the repository..."
+    yadm bootstrap
+}
+
+parse_args "$@"
+set_repo
+check_dependencies
+backup_files
+bootstrap

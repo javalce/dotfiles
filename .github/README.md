@@ -21,14 +21,14 @@ After bootstrapping is done, log out and log back in to apply changes.
 
 ### Using the installer
 
-> :warning: The installer will clone the repository using https. If you want to use ssh, you can do it manually.
+```bash
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash
+```
+
+> :warning: The installer will clone the repository using https by default. If you want to use ssh, you need to pass the `--ssh` flag to the installer.
 
 ```bash
-# Using curl
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash
-
-# Using wget
-wget -qO- https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash - --ssh
 ```
 
 ### Manually
