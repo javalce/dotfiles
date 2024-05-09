@@ -25,10 +25,10 @@ After bootstrapping is done, log out and log back in to apply changes.
 
 ```bash
 # Using curl
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/tree/master/.github/installer | bash
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash
 
 # Using wget
-wget -qO- https://raw.githubusercontent.com/javalce/dotfiles/tree/master/.github/installer | bash
+wget -qO- https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash
 ```
 
 ### Manually
