@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Install JetBarins Mono, JetBarinsMono Nerd Font and Cascadia Code fonts
-sudo pacman -S ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-cascadia-code --noconfirm

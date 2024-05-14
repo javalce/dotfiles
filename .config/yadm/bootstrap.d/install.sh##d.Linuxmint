@@ -1,0 +1,145 @@
+#!/bin/sh
+
+prepare_environment() {
+    # Update system
+    sudo apt-get update && sudo apt-get upgrade -y
+
+    # Install packages to allow apt to use a repository over HTTPS
+    sudo apt-get install -y ca-certificates curl gnupg wget git git-flow unzip tar
+
+    # Shell completions
+    mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
+
+    cat <<EOF >"$HOME/.bash_completion"
+if [ -d "\$HOME/.bash_completion.d" ]; then
+    for file in \$HOME/.bash_completion.d/*; do
+        . "\$file"
+    done
+    unset file
+fi
+EOF
+}
+
+install_terminal_tools() {
+    # Install zsh
+    sudo apt-get install -y zsh
+    ln -sf ~/.config/zsh/zshrc ~/.zshrc
+
+    # Install kitty terminal
+    sudo apt-get install -y kitty
+
+    # Install vim and neovim editor
+    sudo apt-get install -y vim neovim
+
+    # Install starship prompt theme
+    curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
+
+    # Install zoxide, a smarter cd command
+    sudo apt-get install -y zoxide
+
+    # Install ripgrep, a faster grep
+    sudo apt-get install -y ripgrep
+
+    # Install tldr
+    sudo apt-get install -y tldr
+}
+
+install_fonts() {
+    # Install JetBarins Mono font
+    sudo apt install -y fonts-jetbrains-mono
+
+    # Install JetBrains Mono Nerd Font
+    directory="$HOME/.local/share/fonts/nerd-fonts"
+    mkdir -p "$directory"
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip -P "$directory"
+    if [ -d "$directory/jetbrains-mono" ]; then rm -rf "$directory/jetbrains-mono"; fi
+    unzip "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
+    rm "$directory/JetBrainsMono.zip"
+    unset directory
+
+    # Install Cascadia Code font
+    sudo apt-get install -y fonts-cascadia-code
+}
+
+install_node() {
+    FNM_DIR="$HOME/.local/share/fnm"
+
+    # Install fnm, a node version manager
+    curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell --install-dir "$FNM_DIR"
+
+    # Add fnm to path
+    export PATH="$FNM_DIR:$PATH"
+
+    # Install nodejs
+    fnm install lts-latest
+    fnm default lts-latest
+
+    # Add fnm to shell
+    eval "$(fnm env)"
+
+    # Add fnm completions
+    fnm completions --shell bash >"$HOME/.bash_completion.d/_fnm"
+    fnm completions --shell zsh >"$HOME/.zfunc/_fnm"
+
+    # Update npm version
+    npm install -g npm
+
+    # Install global dependencies
+    npm install -g @angular/cli
+
+    # Install pnpm
+    curl -fsSL https://get.pnpm.io/install.sh | sudo --user="$USER" sh -
+}
+
+install_python_tools() {
+    # Install python dependencies
+    sudo apt-get install -y python-is-python3 python3-pip python3-venv pipx
+
+    # Install poetry
+    pipx install poetry
+
+    # Add poetry to PATH
+    export PATH="$HOME/.local/bin:$PATH"
+
+    # Install poetry completions
+    poetry completions bash >"$HOME/.bash_completion.d/_poetry"
+    poetry completions zsh >"$HOME/.zfunc/_poetry"
+}
+
+install_docker() {
+    # Add Docker's official GPG key
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+    # Add Docker's official apt repository
+    echo \
+        "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$UBUNTU_CODENAME")" stable" |
+        sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+
+    # Install Docker Engine
+    sudo apt-get update -y
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    # Add user to docker group
+    sudo usermod -aG docker "$USER"
+}
+
+install_sdkman() {
+    curl -s "https://get.sdkman.io" | bash
+
+    # shellcheck source=/dev/null
+    . "$HOME/.sdkman/bin/sdkman-init.sh"
+
+    sdk install java 17.0.11-amzn
+    sdk install maven 3.9.6
+}
+
+prepare_environment
+install_terminal_tools
+install_fonts
+install_node
+install_python_tools
+install_docker
+install_sdkman
