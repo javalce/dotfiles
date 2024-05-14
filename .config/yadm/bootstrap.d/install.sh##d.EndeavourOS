@@ -11,7 +11,7 @@ prepare_environment() {
     sudo pacman -S ca-certificates curl gnupg wget git unzip tar --noconfirm
 
     # Install gitflow-avh
-    sudo pamac install gitflow-avh --no-confirm
+    sudo yay -S gitflow-avh --no-confirm
 
     # Shell completions
     mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
