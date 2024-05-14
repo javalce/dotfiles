@@ -2,12 +2,14 @@
 
 Using **yadm** to manage my dotfiles.
 
-You can bootstrap your [Debian](https://www.debian.org), [Ubuntu](https://ubuntu.com), [Linux Mint](https://linuxmint.com), [Fedora](https://getfedora.org) or [Manjaro](https://manjaro.org) system with this repository.
+You can bootstrap your [Debian](https://www.debian.org), [Ubuntu](https://ubuntu.com), [Linux Mint](https://linuxmint.com), [Fedora](https://getfedora.org), [Manjaro](https://manjaro.org) or [EndeavourOS](https://endeavouros.com) system with this repository.
 
 ## Prerequisites
 
 - [yadm](https://yadm.io) (Yet Another Dotfiles Manager)
 - [curl](https://curl.se) or [wget](https://www.gnu.org/software/wget/)
+
+If you are using Manjaro or EndeavourOS, make sure you have `AUR` repositories enabled and `base-devel` and `git` packages installed.
 
 ## Setup
 
