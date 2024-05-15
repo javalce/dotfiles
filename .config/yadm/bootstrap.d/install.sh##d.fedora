@@ -46,6 +46,18 @@ install_terminal_tools() {
 
     # Install tldr
     sudo dnf install -y tealdeer
+
+    # Install bat, a cat clone with syntax highlighting
+    sudo dnf install -y bat
+
+    # Install rofi, an application launcher
+    sudo dnf install -y rofi
+
+    # Install fzf, a fuzzy finder
+    sudo dnf install -y fzf
+
+    # Install fd, a faster find
+    sudo dnf install -y fd-find
 }
 
 install_fonts() {

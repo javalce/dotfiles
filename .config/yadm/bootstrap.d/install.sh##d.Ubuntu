@@ -42,6 +42,18 @@ install_terminal_tools() {
 
     # Install tldr
     sudo apt-get install -y tldr
+
+    # Install bat, a cat clone with syntax highlighting
+    sudo apt-get install -y batcat
+
+    # Install rofi, an application launcher
+    sudo apt-get install -y rofi
+
+    # Install fzf, a fuzzy finder
+    sudo apt-get install -y fzf
+
+    # Install fd, a faster find
+    sudo apt-get install -y fd-find
 }
 
 install_fonts() {

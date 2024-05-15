@@ -48,6 +48,21 @@ install_terminal_tools() {
 
     # Install tldr
     sudo pacman -S --noconfirm tealdeer
+
+    # Install bat, a cat clone with syntax highlighting
+    sudo pacman -S --noconfirm bat
+
+    # Install rofi, an application launcher
+    sudo pacman -S --noconfirm rofi
+
+    # Install fzf, a fuzzy finder
+    sudo pacman -S --noconfirm fzf
+
+    # Install fd, a faster find
+    sudo pacman -S --noconfirm fd
+
+    # Install yazi, a terminal explorer
+    sudo pacman -S --noconfirm yazi
 }
 
 install_fonts() {
