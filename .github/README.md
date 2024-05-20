@@ -1,8 +1,8 @@
 # dotfiles
 
-Using **yadm** to manage my dotfiles.
+Using **yadm** to manage my dotfiles for my [Manjaro](https://manjaro.org) system.
 
-You can bootstrap your [Debian](https://www.debian.org), [Ubuntu](https://ubuntu.com), [Linux Mint](https://linuxmint.com), [Fedora](https://getfedora.org), [Manjaro](https://manjaro.org) or [EndeavourOS](https://endeavouros.com) system with this repository.
+You can also bootstrap your [Manjaro](https://manjaro.org) or [EndeavourOS](https://endeavouros.com) system with this repository.
 
 ## Prerequisites
 
@@ -10,6 +10,10 @@ You can bootstrap your [Debian](https://www.debian.org), [Ubuntu](https://ubuntu
 - [curl](https://curl.se) or [wget](https://www.gnu.org/software/wget/)
 
 If you are using Manjaro or EndeavourOS, make sure you have `AUR` repositories enabled and `base-devel` and `git` packages installed.
+
+```bash
+sudo pacman -S base-devel git
+```
 
 ## Setup
 
@@ -78,16 +82,16 @@ yadm bootstrap
 
 ### Fonts
 
-- JetBrains Mono (installed through repo)
-- JetBrains Mono Nerd Font (installed in ~/.local/share/fonts)
-- Cascadia Code (installed through repo if available or in ~/.local/share/fonts)
+- JetBrains Mono
+- JetBrains Mono Nerd Font
+- Cascadia Code
 
 ### Node
 
 - [fnm](https://github.com/Schniz/fnm) (Fast Node Manager)
-- npm
+- [npm](https://www.npmjs.com)
 - [pnpm](https://pnpm.io)
-- @angular/cli
+- [@angular/cli](https://angular.dev)
 
 ### Python
 
@@ -102,3 +106,11 @@ Installs docker and docker-compose as **Docker** recommends in their [docs](http
 
 - docker
 - docker compose
+
+### SDKMAN
+
+Installs [SDKMAN](https://sdkman.io) and some SDKs and tools.
+
+- Java 17
+- Java 21
+- Maven
