@@ -1,4 +1,14 @@
-alias cat='batcat'
+#!/usr/bin/env bash
+
+command_exists() {
+    type "$1" &>/dev/null
+}
+
+if command_exists batcat; then
+    alias cat='batcat'
+elif command_exists bat; then
+    alias cat='bat'
+fi
 
 # some more ls aliases
 # alias ll='ls -alh'
@@ -10,7 +20,6 @@ alias sshk='kitty +kitten ssh'
 alias icat='kitty +kitten icat'
 alias diffk='kitty +kitten diff'
 alias vim='nvim'
-#alias open='xdg-open'
 
 # yadm alias
 alias yadmsync="yadm add -u && yadm commit && yadm push"
