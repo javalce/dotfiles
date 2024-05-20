@@ -106,7 +106,7 @@ install_node() {
     npm install -g @angular/cli
 
     # Install pnpm
-    curl -fsSL https://get.pnpm.io/install.sh | sudo --user="$USER" sh -
+    curl -fsSL https://get.pnpm.io/install.sh | sh -
 }
 
 install_python_tools() {
