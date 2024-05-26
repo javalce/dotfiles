@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 command_exists() {
-    type "$1" &>/dev/null
+	type "$1" &>/dev/null
 }
 
 if command_exists batcat; then
-    alias cat='batcat'
+	alias cat='batcat'
 elif command_exists bat; then
-    alias cat='bat'
+	alias cat='bat'
 fi
 
 # some more ls aliases
@@ -19,6 +19,7 @@ fi
 alias sshk='kitty +kitten ssh'
 alias icat='kitty +kitten icat'
 alias diffk='kitty +kitten diff'
+
 alias vim='nvim'
 
 # yadm alias
