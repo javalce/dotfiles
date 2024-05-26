@@ -6,6 +6,3 @@ configuration {
   disable-history:            false;
   modi:                       "drun";
 }
-
-@theme "spotlight-dark.rasi"
-
