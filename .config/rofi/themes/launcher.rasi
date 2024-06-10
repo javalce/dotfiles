@@ -31,7 +31,7 @@ window {
     location:       center;
     width:          650px;
     x-offset:       0px;
-    y-offset:       -200px;
+    y-offset:       0px;
     border-radius:  8;
     transparency: "real";
     cursor: "default";
