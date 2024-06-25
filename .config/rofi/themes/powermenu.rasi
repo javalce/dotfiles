@@ -81,7 +81,7 @@ textbox-prompt-colon {
     border-radius:               100%;
     border-color:                @selected;
     background-color:            transparent;
-    text-color:                  @backgrund;
+    text-color:                  @background;
 }
 prompt {
     enabled:                     true;
