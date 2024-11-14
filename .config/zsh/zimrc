@@ -18,6 +18,7 @@ zmodule ohmyzsh/ohmyzsh --source lib/git.zsh
 
 # oh-my-zsh plugins
 zmodule ohmyzsh/ohmyzsh --root plugins/aliases
+# zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
 zmodule ohmyzsh/ohmyzsh --root plugins/copybuffer
 zmodule ohmyzsh/ohmyzsh --root plugins/copyfile
 zmodule ohmyzsh/ohmyzsh --root plugins/git
