@@ -2,6 +2,7 @@ return {
   {
     "brenoprata10/nvim-highlight-colors",
     event = "LazyFile",
+    enabled = false,
     opts = {
       ---Render style
       ---@usage 'background' | 'foreground'|'virtual'
