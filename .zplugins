@@ -1,0 +1,21 @@
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/aliases
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/copyfile
+ohmyzsh/ohmyzsh path:plugins/copypath
+ohmyzsh/ohmyzsh path:plugins/docker kind:fpath
+ohmyzsh/ohmyzsh path:plugins/docker-compose kind:fpath
+ohmyzsh/ohmyzsh path:plugins/fnm kind:fpath
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/git-flow-avh kind:fpath
+ohmyzsh/ohmyzsh path:plugins/mvn kind:fpath
+ohmyzsh/ohmyzsh path:plugins/pj
+ohmyzsh/ohmyzsh path:plugins/poetry kind:fpath
+ohmyzsh/ohmyzsh path:plugins/rust
+ohmyzsh/ohmyzsh path:plugins/starship
+ohmyzsh/ohmyzsh path:plugins/uv kind:fpath
+ohmyzsh/ohmyzsh path:plugins/zoxide
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting kind:defer
