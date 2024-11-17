@@ -13,7 +13,6 @@ ohmyzsh/ohmyzsh path:plugins/mvn kind:fpath
 ohmyzsh/ohmyzsh path:plugins/pj
 ohmyzsh/ohmyzsh path:plugins/poetry kind:fpath
 ohmyzsh/ohmyzsh path:plugins/rust
-ohmyzsh/ohmyzsh path:plugins/starship
 ohmyzsh/ohmyzsh path:plugins/uv kind:fpath
 ohmyzsh/ohmyzsh path:plugins/zoxide
 

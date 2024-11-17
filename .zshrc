@@ -20,8 +20,8 @@ unset zplugins ANTIDOTE_HOME
 
 fpath+=(~/.zfunc)
 
-# User configuration
-
+export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
+eval "$(starship init zsh)"
 
 PROJECT_PATHS=(~/Work ~/Dev)
 
