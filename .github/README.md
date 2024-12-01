@@ -1,8 +1,8 @@
 # dotfiles
 
-Using **yadm** to manage my dotfiles for my [Manjaro](https://manjaro.org) system.
+Using **yadm** to manage my dotfiles for my [Pop!_OS](https://pop.system76.com) system.
 
-You can also bootstrap your [Manjaro](https://manjaro.org) or [EndeavourOS](https://endeavouros.com) system with this repository.
+You can also bootstrap your [Fedora](https://fedoraproject.org), [Manjaro](https://manjaro.org) or [EndeavourOS](https://endeavouros.com) system with this repository.
 
 ## Prerequisites
 
@@ -35,6 +35,12 @@ curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/set
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash - --ssh
+```
+
+If you want to use skip the bootstrap process, you can pass the `--no-bootstrap` flag to the installer.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash - --no-bootstrap
 ```
 
 ### Manually
@@ -92,6 +98,7 @@ yadm bootstrap
 - [npm](https://www.npmjs.com)
 - [pnpm](https://pnpm.io)
 - [@angular/cli](https://angular.dev)
+- [@nestjs/cli](https://nestjs.com)
 
 ### Python
 
@@ -99,6 +106,7 @@ yadm bootstrap
 - pip
 - pipx
 - [poetry](https://python-poetry.org)
+- [uv](https://docs.astral.sh/uv)
 
 ### Docker
 
@@ -112,5 +120,4 @@ Installs docker and docker-compose as **Docker** recommends in their [docs](http
 Installs [SDKMAN](https://sdkman.io) and some SDKs and tools.
 
 - Java 17
-- Java 21
 - Maven

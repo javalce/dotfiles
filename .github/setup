@@ -4,74 +4,83 @@ set -euo pipefail
 
 SSH=
 REPO=
+NO_BOOTSTRAP=
 BACKUP_FILES=(
-    "$HOME/.bashrc"
-    "$HOME/.profile"
-    "$HOME/.zshrc"
+  "$HOME/.bashrc"
+  "$HOME/.profile"
+  "$HOME/.zshrc"
 )
 
 parse_args() {
 
-    while [[ $# -gt 0 ]]; do
-        key="$1"
-        case $key in
-        --ssh)
-            SSH="true"
-            shift
-            ;;
-        *)
-            echo "Unrecognized argument $key"
-            exit 1
-            ;;
-        esac
-    done
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+    --ssh)
+      SSH="true"
+      shift
+      ;;
+    --no-bootstrap)
+      NO_BOOTSTRAP="true"
+      shift
+      ;;
+    *)
+      echo "Unrecognized argument $key"
+      exit 1
+      ;;
+    esac
+  done
 }
 
 set_repo() {
-    if [ "$SSH" == "true" ]; then
-        REPO="git@github.com:javalce/dotfiles.git"
-    else
-        REPO="https://github.com/javalce/dotfiles.git"
-    fi
+  if [ "$SSH" == "true" ]; then
+    REPO="git@github.com:javalce/dotfiles.git"
+  else
+    REPO="https://github.com/javalce/dotfiles.git"
+  fi
 }
 
 check_dependencies() {
-    echo "Checking dependencies for the setup script..."
-    SHOULD_EXIT=
+  echo "Checking dependencies for the setup script..."
+  SHOULD_EXIT=
 
-    echo -n "Checking availability of yadm... "
-    if hash yadm 2>/dev/null; then
-        echo "OK!"
-    else
-        echo "Missing"
-        SHOULD_EXIT="true"
-    fi
+  echo -n "Checking availability of yadm... "
+  if hash yadm 2>/dev/null; then
+    echo "OK!"
+  else
+    echo "Missing"
+    SHOULD_EXIT="true"
+  fi
 
-    if [ "$SHOULD_EXIT" == "true" ]; then
-        echo "Not running the setup script due to missing dependencies."
-        exit 1
-    fi
+  if [ "$SHOULD_EXIT" == "true" ]; then
+    echo "Not running the setup script due to missing dependencies."
+    exit 1
+  fi
 }
 
 backup_files() {
-    echo "Backing up files..."
-    for file in "${BACKUP_FILES[@]}"; do
-        if [ -f "$file" ]; then
-            backup_file="$file.bak"
-            echo "Backing up $file to $backup_file"
-            cp "$file" "$backup_file"
-        fi
-    done
+  echo "Backing up files..."
+  for file in "${BACKUP_FILES[@]}"; do
+    if [ -f "$file" ]; then
+      backup_file="$file.bak"
+      echo "Backing up $file to $backup_file"
+      cp "$file" "$backup_file"
+    fi
+  done
 }
 
 bootstrap() {
-    echo "Cloning the repository $REPO..."
-    yadm clone --no-bootstrap "$REPO"
+  echo "Cloning the repository $REPO..."
+  yadm clone --no-bootstrap "$REPO"
 
-    yadm checkout "$HOME"
+  yadm checkout "$HOME"
 
+  if [ "$NO_BOOTSTRAP" != "true" ]; then
     echo "Bootstrapping the repository..."
     yadm bootstrap
+  else
+    echo "Skipping bootstrap..."
+  fi
 }
 
 parse_args "$@"
