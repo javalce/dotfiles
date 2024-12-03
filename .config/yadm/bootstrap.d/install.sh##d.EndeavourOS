@@ -29,7 +29,6 @@ EOF
 install_terminal_tools() {
     # Install zsh
     sudo pacman -S zsh --noconfirm
-    ln -sf ~/.config/zsh/zshrc ~/.zshrc
 
     # Install kitty terminal
     sudo pacman -S --noconfirm kitty
@@ -88,13 +87,13 @@ install_node() {
 
     # Add fnm completions
     fnm completions --shell bash >"$HOME/.bash_completion.d/_fnm"
-    fnm completions --shell zsh >"$HOME/.zfunc/_fnm"
 
     # Update npm version
     npm install -g npm
 
     # Install global dependencies
     npm install -g @angular/cli
+    npm install -g @nestjs/cli
 
     # Install pnpm
     curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -102,17 +101,17 @@ install_node() {
 
 install_python_tools() {
     # Install python dependencies
-    sudo pacman -S --noconfirm python-pip python-venv python-pipx
+    sudo pacman -S --noconfirm python-pip python-pipx
 
-    # Install poetry
+    # Install poetry and uv
     pipx install poetry
+    pipx install uv
 
     # Add poetry to PATH
     export PATH="$HOME/.local/bin:$PATH"
 
     # Install poetry completions
     poetry completions bash >"$HOME/.bash_completion.d/_poetry"
-    poetry completions zsh >"$HOME/.zfunc/_poetry"
 }
 
 install_docker() {
@@ -120,8 +119,7 @@ install_docker() {
     sudo pacman -S docker docker-buildx docker-compose --noconfirm
 
     # Enable and start docker service
-    sudo systemctl start docker.service
-    sudo systemctl enable docker.service
+    sudo systemctl enable --now docker
 
     # Add user to docker group
     sudo usermod -aG docker "$USER"
@@ -133,8 +131,13 @@ install_sdkman() {
     # shellcheck source=/dev/null
     . "$HOME/.sdkman/bin/sdkman-init.sh"
 
-    sdk install java 17.0.11-amzn
-    sdk install maven 3.9.6
+    sdk install java 17.0.13-amzn
+    sdk install maven 3.9.9
+}
+
+install_rust() {
+    # Install rust
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 }
 
 prepare_environment
@@ -144,3 +147,4 @@ install_node
 install_python_tools
 install_docker
 install_sdkman
+install_rust

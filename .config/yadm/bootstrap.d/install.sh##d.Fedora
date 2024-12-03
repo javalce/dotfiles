@@ -2,16 +2,17 @@
 
 prepare_environment() {
     # Update system
-    sudo pacman -Syyu --noconfirm
+    sudo dnf update -y
 
     # Install make and cmake
-    sudo pacman -S make cmake --noconfirm
+    sudo dnf install make cmake -y
 
     # Install packages to allow apt to use a repository over HTTPS
-    sudo pacman -S ca-certificates curl gnupg wget git unzip tar --noconfirm
+    sudo dnf install -y ca-certificates curl gnupg wget git unzip tar
 
     # Install gitflow-avh
-    sudo pamac install gitflow-avh --no-confirm
+    sudo dnf copr enable elegos/gitflow
+    sudo dnf install gitflow -y
 
     # Shell completions
     mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
@@ -28,45 +29,50 @@ EOF
 
 install_terminal_tools() {
     # Install zsh
-    sudo pacman -S zsh --noconfirm
+    sudo dnf install -y zsh
 
     # Install kitty terminal
-    sudo pacman -S --noconfirm kitty
+    sudo dnf install -y kitty
 
     # Install vim and neovim editor
-    sudo pacman -S vim neovim --noconfirm
+    sudo dnf install -y vim neovim
 
     # Install starship prompt theme
-    sudo pacman -S starship --noconfirm
+    sudo dnf copr enable atim/starship
+    sudo dnf install -y starship
 
     # Install zoxide, a smarter cd command
-    sudo pacman -S --noconfirm zoxide
+    sudo dnf install -y zoxide
 
     # Install ripgrep, a faster grep
-    sudo pacman -S --noconfirm ripgrep
+    sudo dnf install -y ripgrep
 
     # Install tldr
-    sudo pacman -S --noconfirm tealdeer
+    sudo dnf install -y tealdeer
 
     # Install bat, a cat clone with syntax highlighting
-    sudo pacman -S --noconfirm bat
+    sudo dnf install -y bat
 
     # Install rofi, an application launcher
-    sudo pacman -S --noconfirm rofi
+    sudo dnf install -y rofi
 
     # Install fzf, a fuzzy finder
-    sudo pacman -S --noconfirm fzf
+    sudo dnf install -y fzf
 
     # Install fd, a faster find
-    sudo pacman -S --noconfirm fd
-
-    # Install yazi, a terminal explorer
-    sudo pacman -S --noconfirm yazi
+    sudo dnf install -y fd-find
 }
 
 install_fonts() {
     # Install JetBarins Mono, JetBarinsMono Nerd Font and Cascadia Code fonts
-    sudo pacman -S ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-cascadia-code --noconfirm
+    sudo dnf install jetbrains-mono-fonts-all cascadia-fonts-all -y
+
+    directory="$HOME/.local/share/fonts/nerd-fonts"
+    mkdir -p "$directory"
+    version=$(curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/$version/JetBrainsMono.zip" -o "$directory/JetBrainsMono.zip"
+    unzip -o "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
+    rm "$directory/JetBrainsMono.zip"
 }
 
 install_node() {
@@ -101,7 +107,7 @@ install_node() {
 
 install_python_tools() {
     # Install python dependencies
-    sudo pacman -S --noconfirm python-pip python-pipx
+    sudo dnf install -y python3-pip pipx
 
     # Install poetry and uv
     pipx install poetry
@@ -116,7 +122,10 @@ install_python_tools() {
 
 install_docker() {
     # Install Docker Engine
-    sudo pacman -S docker docker-buildx docker-compose --noconfirm
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     # Enable and start docker service
     sudo systemctl enable --now docker
