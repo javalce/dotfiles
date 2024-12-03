@@ -1,8 +1,13 @@
 # dotfiles
 
-Using **yadm** to manage my dotfiles for my [Pop!_OS](https://pop.system76.com) system.
+Using **yadm** to manage my dotfiles for my current [Pop!\_OS](https://pop.system76.com) system.
 
-You can also bootstrap your [Fedora](https://fedoraproject.org), [Manjaro](https://manjaro.org) or [EndeavourOS](https://endeavouros.com) system with this repository.
+The are also some scripts to bootstrap the following distros:
+
+- [Fedora](https://fedoraproject.org)
+- [Linux Mint](https://linuxmint.com)
+- [Manjaro](https://manjaro.org)
+- [EndeavourOS](https://endeavouros.com)
 
 ## Prerequisites
 
