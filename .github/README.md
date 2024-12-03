@@ -39,13 +39,13 @@ curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/set
 > :warning: The installer will clone the repository using https by default. If you want to use ssh, you need to pass the `--ssh` flag to the installer.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash - --ssh
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash -s -- --ssh
 ```
 
 If you want to use skip the bootstrap process, you can pass the `--no-bootstrap` flag to the installer.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash - --no-bootstrap
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash -s -- --no-bootstrap
 ```
 
 ### Manually
