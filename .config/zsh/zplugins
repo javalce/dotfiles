@@ -1,0 +1,43 @@
+#!/bin/zsh
+#
+# zplugins - antidote plugins file
+#
+
+# If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you
+# don't have to worry about whether OMZ will work correctly.
+getantidote/use-omz
+
+# Regarding OMZ libs - you may decide to use all of OMZ's lib like so:
+#   ohmyzsh/ohmyzsh path:lib
+#
+# -OR-, if you really know what you want and nothing else, you might be able to
+# choose only the specific libs you need:
+#   ohmyzsh/ohmyzsh path:lib/clipboard.zsh
+#
+
+# Let's go ahead and use all of Oh My Zsh's lib directory.
+ohmyzsh/ohmyzsh path:lib
+
+# Load Oh My Zsh plugins
+ohmyzsh/ohmyzsh path:plugins/aliases                    # Search aliases
+ohmyzsh/ohmyzsh path:plugins/aws                        # AWS completion and utiliy commands
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages          # The name says it all
+ohmyzsh/ohmyzsh path:plugins/copyfile                   # Copy the content of a file to the clipboard
+ohmyzsh/ohmyzsh path:plugins/copybuffer                 # Copy the content selection to the clipboard
+ohmyzsh/ohmyzsh path:plugins/git                        # Git aliases
+ohmyzsh/ohmyzsh path:plugins/pj                         # cd to local projects with completions
+ohmyzsh/ohmyzsh path:plugins/starship                   # Prompt
+ohmyzsh/ohmyzsh path:plugins/zoxide                     # Quick directory jumping
+
+# Load local plugins
+$ZSH_PLUGINS/aliases
+$ZSH_PLUGINS/utility
+$ZSH_PLUGINS/fnm
+$ZSH_PLUGINS/pnpm
+$ZSH_PLUGINS/bun
+$ZSH_PLUGINS/sdkman
+
+# Load Fish-like plugins
+zsh-users/zsh-completions path:src kind:fpath           # Zsh completions
+zsh-users/zsh-autosuggestions                           # Suggest commands based on history
+zsh-users/zsh-syntax-highlighting                       # Syntax highlighting

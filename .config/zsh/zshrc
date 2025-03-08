@@ -1,0 +1,43 @@
+#!/bin/zsh
+#
+# zshrc - Zsh file loaded on interactive shell sessions.
+#
+
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+  export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+ZSH_HOME=${HOME}/.config/zsh
+ZPLUGINS=${ZSH_HOME}/zplugins
+ZSH_PLUGINS=${ZSH_HOME}/plugins
+
+fpath=(${ZSH_HOME}/zfunc $fpath)
+
+# Set any zstyles you might use for configuration
+[[ ! -f ${ZSH_HOME}/zstyles ]] || source ${ZSH_HOME}/zstyles
+
+# Clone antidote if necessary
+if [[ ! -d ${ZDOTDIR:-$HOME}/.antidote ]]; then
+  git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote
+fi
+
+# Lazy-load antidote
+fpath+=(${ZDOTDIR:-$HOME}/.antidote/functions)
+autoload -Uz antidote
+
+# Generate a new static file whenever .zplugins is updated.
+if [[ ! ${ZPLUGINS}.zsh -nt ${ZPLUGINS} ]]; then
+  antidote bundle <${ZPLUGINS} >|${ZPLUGINS}.zsh
+fi
+
+# Source your static plugins file.
+source ${ZPLUGINS}.zsh
+
+# Starship prompt theme
+export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
+
+PROJECT_PATHS=(
+  ${HOME}/Work/TheWiseDreams
+  ${HOME}/Work/UV
+  ${HOME}/Dev
+)
