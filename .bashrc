@@ -2,12 +2,12 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+  . /etc/bashrc
 fi
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
@@ -16,11 +16,11 @@ export PATH
 
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
-    for rc in ~/.bashrc.d/*; do
-        if [ -f "$rc" ]; then
-            . "$rc"
-        fi
-    done
+  for rc in ~/.bashrc.d/*; do
+    if [ -f "$rc" ]; then
+      . "$rc"
+    fi
+  done
 fi
 unset rc
 
@@ -28,14 +28,14 @@ export EDITOR="nvim"
 
 # fnm
 if [ -d "$HOME/.local/share/fnm" ]; then
-	export PATH="$HOME/.local/share/fnm:$PATH"
-	eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+  export PATH="$HOME/.local/share/fnm:$PATH"
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 fi
 
 # Load starship prompt
 if command -v starship &>/dev/null; then
-	export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-	eval "$(starship init bash)"
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+  eval "$(starship init bash)"
 fi
 
 # Load zoxide (z command)
@@ -51,6 +51,9 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
