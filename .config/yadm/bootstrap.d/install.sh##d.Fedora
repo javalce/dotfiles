@@ -15,8 +15,6 @@ prepare_environment() {
     sudo dnf install gitflow -y
 
     # Shell completions
-    mkdir -p "$HOME/.bash_completion.d" "$HOME/.zfunc"
-
     cat <<EOF >"$HOME/.bash_completion"
 if [ -d "\$HOME/.bash_completion.d" ]; then
     for file in \$HOME/.bash_completion.d/*; do
@@ -97,10 +95,6 @@ install_node() {
     # Update npm version
     npm install -g npm
 
-    # Install global dependencies
-    npm install -g @angular/cli
-    npm install -g @nestjs/cli
-
     # Install pnpm
     curl -fsSL https://get.pnpm.io/install.sh | sh -
 }
@@ -140,7 +134,8 @@ install_sdkman() {
     # shellcheck source=/dev/null
     . "$HOME/.sdkman/bin/sdkman-init.sh"
 
-    sdk install java 17.0.13-amzn
+    sdk install java 17.0.14-amzn
+    sdk install java 21.0.6-amzn
     sdk install maven 3.9.9
 }
 
