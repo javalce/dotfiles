@@ -1,12 +1,11 @@
 # dotfiles
 
-Using **yadm** to manage my dotfiles for my current [Pop!\_OS](https://pop.system76.com) system.
+Using **yadm** to manage my dotfiles for my current [Manjaro](https://manjaro.org) system.
 
 The are also some scripts to bootstrap the following distros:
 
 - [Fedora](https://fedoraproject.org)
 - [Linux Mint](https://linuxmint.com)
-- [Manjaro](https://manjaro.org)
 - [EndeavourOS](https://endeavouros.com)
 
 ## Prerequisites
@@ -33,19 +32,20 @@ After bootstrapping is done, log out and log back in to apply changes.
 ### Using the installer
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/main/.github/setup | bash
 ```
 
-> :warning: The installer will clone the repository using https by default. If you want to use ssh, you need to pass the `--ssh` flag to the installer.
+> [!WARNING]
+> The installer will clone the repository using https by default. If you want to use **ssh**, you need to pass the `--ssh` flag to the installer.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash -s -- --ssh
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/main/.github/setup | bash -s -- --ssh
 ```
 
 If you want to use skip the bootstrap process, you can pass the `--no-bootstrap` flag to the installer.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/master/.github/setup | bash -s -- --no-bootstrap
+curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/main/.github/setup | bash -s -- --no-bootstrap
 ```
 
 ### Manually
@@ -58,6 +58,8 @@ cp ~/.zshrc ~/.zshrc.bak
 
 # Clone the repository
 yadm clone --no-bootstrap https://github.com/javalce/dotfiles.git
+# or using ssh
+yadm clone --no-bootstrap git@github.com:javalce/dotfiles.git
 
 # Checkout the files
 yadm checkout "$HOME"
@@ -82,7 +84,7 @@ yadm bootstrap
 ### Terminal
 
 - zsh
-- [zimfw](https://zimfw.sh)
+- [antidote](https://antidote.sh) with [oh-my-zsh](https://ohmyz.sh)
 - kitty
 - vim
 - neovim
@@ -101,13 +103,12 @@ yadm bootstrap
 
 - [fnm](https://github.com/Schniz/fnm) (Fast Node Manager)
 - [npm](https://www.npmjs.com)
-- [pnpm](https://pnpm.io)
-- [@angular/cli](https://angular.dev)
-- [@nestjs/cli](https://nestjs.com)
+- [pnpm](https://pnpm.io) (better than pnpm)
+- [bun](https://bun.sh) (the faster npm)
 
 ### Python
 
-- python-is-python3 (you can use python3 as python, only in Debian and derivatives)
+- python-is-python3 (you can use python3 as python, **only in Debian and derivatives**)
 - pip
 - pipx
 - [poetry](https://python-poetry.org)
@@ -117,6 +118,9 @@ yadm bootstrap
 
 Installs docker and docker-compose as **Docker** recommends in their [docs](https://docs.docker.com/engine/install). Also adds the current user to the docker group.
 
+> [!NOTE]
+> On Manjaro and EndeavourOS, there are not official packages from Docker, so it installs the `docker` and `docker-compose` packages from their respective distro repositories.
+
 - docker
 - docker compose
 
@@ -125,4 +129,5 @@ Installs docker and docker-compose as **Docker** recommends in their [docs](http
 Installs [SDKMAN](https://sdkman.io) and some SDKs and tools.
 
 - Java 17
+- Java 21
 - Maven
