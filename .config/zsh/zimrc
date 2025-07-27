@@ -1,0 +1,60 @@
+#!/bin/zsh
+
+#
+# Init
+#
+
+zmodule environment
+
+#
+# Completion
+#
+
+zmodule zsh-users/zsh-completions --fpath src
+zmodule completion
+
+#
+# Prompt
+#
+
+zmodule joke/zim-starship
+
+#
+# Utils
+#
+
+zmodule utility
+zmodule mdumitru/git-aliases
+zmodule kiesman99/zim-zoxide
+zmodule sunlei/zsh-ssh
+
+#
+# Oh My Zsh plugins (no alternative modules)
+#
+
+zmodule ohmyzsh/ohmyzsh --root plugins/aliases
+
+#
+# Editor
+#
+
+zmodule input
+
+#
+# Custom plugins
+#
+
+zmodule ${ZSH_PLUGINS}/pj
+zmodule ${ZSH_PLUGINS}/fnm
+zmodule ${ZSH_PLUGINS}/pnpm
+zmodule ${ZSH_PLUGINS}/bun
+zmodule ${ZSH_PLUGINS}/sdkman
+zmodule ${ZSH_PLUGINS}/python
+zmodule ${ZSH_PLUGINS}/tmux
+
+#
+# Fish-like features
+#
+
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions

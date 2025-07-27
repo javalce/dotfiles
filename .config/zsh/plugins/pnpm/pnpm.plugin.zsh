@@ -1,12 +1,13 @@
-export PNPM_HOME="/home/javalce/.local/share/pnpm"
+() {
+  add_to_path "$PNPM_HOME"
 
-# Añadir PNPM_HOME al PATH si no está ya presente
-[[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
+  local command=${commands[pnpm]}
+  [[ -z $command ]] && return 1
 
-# Configurar autocompletado si no está ya configurado
-if [[ ! -f "$ZSH_CACHE_DIR/completions/_pnpm" ]]; then
-  autoload -Uz _pnpm
-  typeset -g -A _comps
-  _comps[pnpm]=_pnpm
-  pnpm completion zsh >|"$ZSH_CACHE_DIR/completions/_pnpm"
-fi
+  # generating completions
+  local compfile=${ZSH_HOME}/functions/_pnpm
+  if [[ ! -e $compfile || $compfile -ot $command ]]; then
+    $command completion zsh >| $compfile
+    print -u2 -PR "* Detected new version 'pnpm'. Regenerated completions."
+  fi
+}

@@ -1,10 +1,22 @@
-export FNM_DIR="$HOME/.local/share/fnm"
+() {
+  add_to_path ${FNM_HOME}
 
-[[ ":$PATH:" != *":$FNM_DIR:"* ]] && export PATH="$FNM_DIR:$PATH" && eval "$(fnm env --use-on-cd)"
+  local command=${commands[fnm]}
+  [[ -z $command ]] && return 1
 
-if [[ ! -f "$ZSH_CACHE_DIR/completions/_fnm" ]]; then
-  autoload -Uz _fnm
-  typeset -g -A _comps
-  _comps[fnm]=_fnm
-  fnm completions --shell=zsh >|"$ZSH_CACHE_DIR/completions/_fnm"
-fi
+  # generating init file
+  local initfile=$1/fnm-init.zsh
+  if [[ ! -e $initfile || $initfile -ot $command ]]; then
+    $command env --use-on-cd >| $initfile
+    zcompile -UR $initfile
+  fi
+
+  # generating completions
+  local compfile=${ZSH_HOME}/functions/_fnm
+  if [[ ! -e $compfile || $compfile -ot $command ]]; then
+    $command completions --shell=zsh >| $compfile
+    print -u2 -PR "* Detected new version 'fnm'. Regenerated completions."
+  fi
+
+  source $initfile
+} ${0:h}
