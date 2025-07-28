@@ -50,7 +50,7 @@ zmodule ${ZSH_PLUGINS}/pnpm
 zmodule ${ZSH_PLUGINS}/bun
 zmodule ${ZSH_PLUGINS}/sdkman
 zmodule ${ZSH_PLUGINS}/python
-zmodule ${ZSH_PLUGINS}/tmux
+zmodule ${ZSH_PLUGINS}/multiplexor
 
 #
 # Fish-like features
