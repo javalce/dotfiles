@@ -4,11 +4,9 @@
   local command=${commands[fnm]}
   [[ -z $command ]] && return 1
 
-  # generating init file
-  local initfile=$1/fnm-init.zsh
-  if [[ ! -e $initfile || $initfile -ot $command ]]; then
-    $command env --use-on-cd >| $initfile
-    zcompile -UR $initfile
+  # loading fnm environment
+  if [[ -z "$FNM_MULTISHELL_PATH" ]]; then
+    eval "$($command env --use-on-cd)"
   fi
 
   # generating completions
@@ -17,6 +15,4 @@
     $command completions --shell=zsh >| $compfile
     print -u2 -PR "* Detected new version 'fnm'. Regenerated completions."
   fi
-
-  source $initfile
 } ${0:h}

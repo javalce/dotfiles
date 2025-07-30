@@ -50,7 +50,7 @@ fi
 
 function add_to_path() {
   local new_path="$1"
-  if print -rl -- $PATH | grep -qx -- "$new_path"; then
+  if print -rl -- $PATH | grep -q -- "$new_path"; then
     return 0
   else
     PATH="$new_path:$PATH"

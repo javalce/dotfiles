@@ -6,12 +6,17 @@ _gen_py_completion() {
     local command=${commands[$bin]}
     [[ -z $command ]] && return 1
     if [[ ! -e $compfile || $compfile -ot $command ]]; then
-      eval "$command $gen_cmd >| $compfile"
+      if print -rl -- $gen_cmd | grep -q -- "$bin"; then
+        eval "$gen_cmd >| $compfile"
+      else
+        eval "$command $gen_cmd >| $compfile"
+      fi
       print -u2 -PR "* Detected new version '$bin'. Regenerated completions."
     fi
   fi
 }
 
+_gen_py_completion pipx "$ZSH_HOME/functions/_pipx"   "register-python-argcomplete pipx"
 _gen_py_completion uv   "$ZSH_HOME/functions/_uv"     "generate-shell-completion zsh"
 _gen_py_completion uvx  "$ZSH_HOME/functions/_uvx"    "--generate-shell-completion zsh"
 _gen_py_completion poetry "$ZSH_HOME/functions/_poetry" "completions zsh"
