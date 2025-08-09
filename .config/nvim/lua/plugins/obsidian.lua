@@ -14,6 +14,22 @@ return {
       -- Description: A Lua utility library for Neovim.
       "nvim-lua/plenary.nvim",
     },
+    enabled = function()
+      -- Enable the plugin only if the 'obsidian' command is available.
+      return vim.fn.executable("obsidian") == 1
+    end,
+    keys = {
+      { "<leader>oc", "<cmd>ObsidianCheck<cr>", desc = "Obsidian Check Checkbox" },
+      { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Insert Obsidian Template" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open in Obsidian App" },
+      { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Show Obsidian Backlinks" },
+      { "<leader>ol", "<cmd>ObsidianLinks<cr>", desc = "Show Obsidian Links" },
+      { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "Create New Note" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search Obsidian" },
+      { "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick Switch" },
+      { "<leader>ow", "<cmd>ObsidianWorkspace<cr>", desc = "Switch Obsidian Workspace" },
+      { "<leader>or", "<cmd>ObsidianRename<cr>", desc = "Rename Note" },
+    },
     opts = {
       -- Define workspaces for Obsidian
       workspaces = {
