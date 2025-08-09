@@ -23,6 +23,7 @@ zmodule joke/zim-starship
 # Utils
 #
 
+zmodule termtitle
 zmodule utility
 zmodule mdumitru/git-aliases
 zmodule kiesman99/zim-zoxide

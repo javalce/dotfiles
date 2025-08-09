@@ -5,3 +5,8 @@
 
 # Auto convert .... to ../..
 zstyle ':zim:input' double-dot-expand no
+
+# Terminal title
+zstyle ':zim:termtitle' format '%1~'
+
+
