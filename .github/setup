@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -euo pipefail
 
@@ -9,25 +9,23 @@ BACKUP_FILES=(
   "$HOME/.bashrc"
   "$HOME/.profile"
   "$HOME/.zshrc"
+  "$HOME/.config/fish"
 )
 
 parse_args() {
 
-  while [[ $# -gt 0 ]]; do
-    key="$1"
+  for key in "$@"; do
     case $key in
-    --ssh)
-      SSH="true"
-      shift
-      ;;
-    --no-bootstrap)
-      NO_BOOTSTRAP="true"
-      shift
-      ;;
-    *)
-      echo "Unrecognized argument $key"
-      exit 1
-      ;;
+      --ssh)
+        SSH="true"
+        ;;
+      --no-bootstrap)
+        NO_BOOTSTRAP="true"
+        ;;
+      *)
+        echo "Unrecognized argument $key"
+        exit 1
+        ;;
     esac
   done
 }
@@ -61,7 +59,11 @@ check_dependencies() {
 backup_files() {
   echo "Backing up files..."
   for file in "${BACKUP_FILES[@]}"; do
-    if [ -f "$file" ]; then
+    if [ -d "$file" ]; then
+      backup_file="$file.bak"
+      echo "Backing up $file to $backup_file"
+      cp -r "$file" "$backup_file"
+    elif [ -f "$file" ]; then
       backup_file="$file.bak"
       echo "Backing up $file to $backup_file"
       cp "$file" "$backup_file"

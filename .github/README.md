@@ -55,6 +55,7 @@ curl -fsSL https://raw.githubusercontent.com/javalce/dotfiles/main/.github/setup
 cp ~/.bashrc ~/.bashrc.bak
 cp ~/.profile ~/.profile.bak
 cp ~/.zshrc ~/.zshrc.bak
+cp -r ~/.config/fish ~/.config/fish.bak
 
 # Clone the repository
 yadm clone --no-bootstrap https://github.com/javalce/dotfiles.git
@@ -81,17 +82,43 @@ yadm bootstrap
 - unzip
 - tar
 
+### Fonts
+
+- JetBrains Mono
+- JetBrains Mono Nerd Font
+- Cascadia Code
+
 ### Terminal
 
+- [kitty](https://sw.kovidgoyal.net/kitty/) (a fast, feature-rich, GPU-based terminal emulator)
+- [wezterm](https://wezfurlong.org/wezterm/) (a GPU-accelerated terminal emulator)
+- [ghostty](https://github.com/ghostty/ghostty) (a terminal emulator for the modern age)
+
+#### ZSH
+
 - zsh
-- [antidote](https://antidote.sh) with [oh-my-zsh](https://ohmyz.sh)
-- kitty
+- [zim](https://zimfw.sh)
+
+#### Fish
+
+- [fish](https://fishshell.com)
+
+### Terminal tools
+
+- [starship](https://starship.rs/) (the best prompt)
+- [zoxide](https://github.com/ajeetdsouza/zoxide) (smart cd command)
+- [tldr](https://tldr.sh) (simple man pages)
+- [bat](https://github.com/sharkdp/bat) (cat clone with wings)
+- [fzf](https://github.com/junegunn/fzf) (fuzzy finder)
+- [fd](https://github.com/sharkdp/fd) (simple, fast and user-friendly alternative to 'find')
+- [lsd](https://github.com/lsd-rs/lsd) (the next gen ls)
+
+### Neovim
+
 - vim
-- neovim
-- [starsip prompt](https://starship.rs/)
-- zoxide
-- ripgrep
-- tldr (simple man pages)
+- [neovim](https://neovim.io)
+- [ripgrep](https://github.com/BurntSushi/ripgrep) (line-oriented search tool)
+- [lazygit](https://github.com/jesseduffield/lazygit) (simple terminal UI for git commands)
 
 ### Fonts
 

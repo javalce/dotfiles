@@ -26,11 +26,11 @@ EOF
 }
 
 install_terminal_tools() {
-    # Install zsh
-    sudo dnf install -y zsh
+    # Install zsh and fish
+    sudo dnf install -y zsh fish
 
-    # Install kitty terminal
-    sudo dnf install -y kitty
+    # Install terminals
+    sudo dnf install -y kitty wezterm ghostty
 
     # Install vim and neovim editor
     sudo dnf install -y vim neovim
@@ -39,30 +39,12 @@ install_terminal_tools() {
     sudo dnf copr enable atim/starship
     sudo dnf install -y starship
 
-    # Install zoxide, a smarter cd command
-    sudo dnf install -y zoxide
-
-    # Install ripgrep, a faster grep
-    sudo dnf install -y ripgrep
-
-    # Install tldr
-    sudo dnf install -y tealdeer
-
-    # Install bat, a cat clone with syntax highlighting
-    sudo dnf install -y bat
-
-    # Install rofi, an application launcher
-    sudo dnf install -y rofi
-
-    # Install fzf, a fuzzy finder
-    sudo dnf install -y fzf
-
-    # Install fd, a faster find
-    sudo dnf install -y fd-find
+    # Install terminal tools
+    sudo dnf install -y zoxide ripgrep tealdeer bat lsd rofi fzf fd-find
 }
 
 install_fonts() {
-    # Install JetBarins Mono, JetBarinsMono Nerd Font and Cascadia Code fonts
+    # Install JetBrains Mono, JetBrainsMono Nerd Font and Cascadia Code fonts
     sudo dnf install jetbrains-mono-fonts-all cascadia-fonts-all -y
 
     directory="$HOME/.local/share/fonts/nerd-fonts"
@@ -83,8 +65,7 @@ install_node() {
     export PATH="$FNM_DIR:$PATH"
 
     # Install nodejs
-    fnm install lts-latest
-    fnm default lts-latest
+    fnm install --lts
 
     # Add fnm to shell
     eval "$(fnm env)"
@@ -95,8 +76,11 @@ install_node() {
     # Update npm version
     npm install -g npm
 
-    # Install pnpm
+    # Install PNPM
     curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+    # Install Bun
+    curl -fsSL https://bun.sh/install | bash
 }
 
 install_python_tools() {
@@ -134,14 +118,9 @@ install_sdkman() {
     # shellcheck source=/dev/null
     . "$HOME/.sdkman/bin/sdkman-init.sh"
 
-    sdk install java 17.0.14-amzn
-    sdk install java 21.0.6-amzn
-    sdk install maven 3.9.9
-}
-
-install_rust() {
-    # Install rust
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    sdk install java 17.0.16-amzn
+    sdk install java 21.0.8-amzn
+    sdk install maven 3.9.11
 }
 
 prepare_environment
@@ -151,4 +130,3 @@ install_node
 install_python_tools
 install_docker
 install_sdkman
-install_rust
