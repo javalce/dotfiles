@@ -107,6 +107,7 @@ yadm bootstrap
 
 - [starship](https://starship.rs/) (the best prompt)
 - [zoxide](https://github.com/ajeetdsouza/zoxide) (smart cd command)
+- [atuin](https://atuin.sh) (a shell history manager)
 - [tldr](https://tldr.sh) (simple man pages)
 - [bat](https://github.com/sharkdp/bat) (cat clone with wings)
 - [fzf](https://github.com/junegunn/fzf) (fuzzy finder)
