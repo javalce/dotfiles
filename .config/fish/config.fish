@@ -3,15 +3,13 @@ set -x STARSHIP_CONFIG $HOME/.config/starship/starship.toml
 set -x FNM_DIR $HOME/.local/share/fnm
 set -x PNPM_HOME $HOME/.local/share/pnpm
 set -x BUN_INSTALL $HOME/.bun
-set -Ux SDKMAN_DIR $HOME/.sdkman
+set -x SDKMAN_DIR $HOME/.sdkman
 
 if set -q SSH_CONNECTION
     set -x EDITOR vim
 else
     set -x EDITOR nvim
 end
-
-set -a PROJECT_PATHS $HOME/Dev $HOME/Work/UV $HOME/Work/TheWiseDreams
 
 fish_add_path -g $HOME/.local/bin $HOME/AppImages $FNM_DIR $PNPM_HOME $BUN_INSTALL/bin
 
@@ -46,3 +44,7 @@ set -g fish_color_param normal
 set -g fish_color_option normal
 set -g fish_color_quote yellow
 set -g fish_color_comment brblack
+
+if test -f $HOME/.config/fish/local.fish
+    source $HOME/.config/fish/local.fish
+end

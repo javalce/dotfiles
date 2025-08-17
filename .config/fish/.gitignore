@@ -1,0 +1,3 @@
+# Untrack user-specific Fish configuration. These files are user/machine specific
+# and should not be version controlled by yadm.
+local.fish
