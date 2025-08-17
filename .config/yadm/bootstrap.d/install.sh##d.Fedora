@@ -41,6 +41,8 @@ install_terminal_tools() {
 
     # Install terminal tools
     sudo dnf install -y zoxide ripgrep tealdeer bat lsd rofi fzf fd-find
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.atuin.sh | sh
 }
 
 install_fonts() {

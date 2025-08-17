@@ -35,7 +35,7 @@ install_terminal_tools() {
     sudo pacman -S vim neovim --noconfirm
 
     # Install terminal tools
-    sudo pacman -S --noconfirm starship zoxide ripgrep tealdeer bat lsd rofi fzf fd yazi
+    sudo pacman -S --noconfirm starship zoxide atuin ripgrep tealdeer bat lsd rofi fzf fd yazi
 }
 
 install_fonts() {
