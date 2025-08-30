@@ -1,5 +1,0 @@
-# Ignore all files in the functions directory
-*
-
-# Preserve the .gitignore file itself
-!.gitignore

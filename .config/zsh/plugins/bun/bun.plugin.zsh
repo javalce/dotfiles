@@ -1,13 +1,13 @@
-() {
-  add_to_path ${BUN_HOME}/bin
+BUN_INSTALL=$HOME/.bun
 
-  local command=${commands[bun]}
-  [[ -z $command ]] && return 1
+# [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
-  #generating completions
-  local compfile=${ZSH_HOME}/functions/_bun
-  if [[ ! -e $compfile || $compfile -ot $command ]]; then
-    cp ${BUN_HOME}/_bun $compfile
-    print -u2 -PR "* Detected new version 'bun'. Regenerated completions."
-  fi
-}
+[[ ":PATH:" != *":$BUN_INSTALL/bin:"* ]] && PATH="$BUN_INSTALL/bin:$PATH"
+
+if [[ ! -f "$ZSH_CACHE_DIR/completions/_bun" ]]; then
+  autoload -Uz _bun
+  typeset -g -A _comps
+  _comps[bun]=_bun
+fi
+
+cat $BUN_INSTALL/_bun >|"$ZSH_CACHE_DIR/completions/_bun" &|

@@ -1,113 +1,24 @@
 #!/bin/zsh
 #
-# .zshrc - Run on interactive Zsh session.
+# .zshrc - Zsh file loaded on interactive shell sessions.
 #
 
-#
-# Variables
-#
+# Zsh options.
+setopt extended_glob
 
-# Set the terminal type to support 256 colors.
-export TERM=xterm-256color
+# Set variables
+ZSH_HOME=${ZDOTDIR:-$HOME/.config/zsh}
+ZSH_CUSTOM=${ZSH_HOME}/plugins
 
-# Zsh configuration paths.
-export ZSH_HOME=${HOME}/.config/zsh
-export ZSH_PLUGINS=${ZSH_HOME}/plugins
+# Source zstyles you might use with antidote.
+[[ -e $ZSH_HOME/zstyles ]] && source $ZSH_HOME/zstyles
 
-# Zimfw configuration paths.
-export ZIM_HOME=${HOME}/.zim
-export ZIM_CONFIG_FILE=${ZSH_HOME}/zimrc
+# Load local config if it exists.
+[[ -e $ZSH_HOME/lib/local.zsh ]] && source $ZSH_HOME/lib/local.zsh
 
-# Starship configuration path.
-export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
+# Create an amazing Zsh config using antidote plugins.
+source $ZSH_HOME/lib/antidote.zsh
 
-# Binary paths.
-export FNM_HOME=${HOME}/.local/share/fnm
-export PNPM_HOME=${HOME}/.local/share/pnpm
-export BUN_HOME=${HOME}/.bun
-export SDKMAN_DIR=${HOME}/.sdkman
-
-# Other environment variables.
-export PROJECT_PATHS=(
-  ${HOME}/Work/TheWiseDreams
-  ${HOME}/Work/UV
-  ${HOME}/Dev
-)
-# Use tmux or zellij as the default multiplexer. Leave it unset to not use any.
-export MULTIPLEXOR=""
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-
-
-#
-# Add custom paths to $PATH
-#
-
-function add_to_path() {
-  local new_path="$1"
-  if print -rl -- $PATH | grep -q -- "$new_path"; then
-    return 0
-  else
-    PATH="$new_path:$PATH"
-    return 1
-  fi
-}
-
-path_to_add=(
-  ${HOME}/.local/bin
-  ${HOME}/bin
-  ${HOME}/AppImages
-)
-
-# Update fpath for zsh completions.
-fpath+=(
-  ${ZSH_HOME}/functions
-)
-
-for zdir in "${path_to_add[@]}"; do
-  add_to_path "$zdir"
-done
-
-unset path_to_add zdir
-
-# Use emacs key bindings
-bindkey -e
-
-#
-# Zstyles
-#
-
-# Load zstyles file with customizations.
-[[ -r ${ZSH_HOME}/zstyles ]] && source ${ZSH_HOME}/zstyles
-
-#
-# Load Zimfw plugin manager
-#
-
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-fi
-
-# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init
-fi
-
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
-
-# Cleanup path function.
-unset -f add_to_path
-
-#
-# Aliases
-#
-
-[[ -r ${ZSH_HOME}/zaliases ]] && source ${ZSH_HOME}/zaliases
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

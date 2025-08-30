@@ -1,13 +1,11 @@
-() {
-  add_to_path "$PNPM_HOME"
+PNPM_HOME=${PNPM_HOME:-${HOME}/.local/share/pnpm}
 
-  local command=${commands[pnpm]}
-  [[ -z $command ]] && return 1
+[[ ":PATH:" != *":$PNPM_HOME:"* ]] && PATH="$PNPM_HOME:$PATH"
 
-  # generating completions
-  local compfile=${ZSH_HOME}/functions/_pnpm
-  if [[ ! -e $compfile || $compfile -ot $command ]]; then
-    $command completion zsh >| $compfile
-    print -u2 -PR "* Detected new version 'pnpm'. Regenerated completions."
-  fi
-}
+if [[ ! -f "$ZSH_CACHE_DIR/completions/_pnpm" ]]; then
+  autoload -Uz _pnpm
+  typeset -g -A _comps
+  _comps[pnpm]=_pnpm
+fi
+
+pnpm completion zsh >|"$ZSH_CACHE_DIR/completions/_pnpm" &|

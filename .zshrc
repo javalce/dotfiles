@@ -1,1 +1,0 @@
-/home/javalce/.config/zsh/zshrc
