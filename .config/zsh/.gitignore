@@ -1,3 +1,4 @@
 *.zwc
 *.zwc.old
+zplugins.zsh
 lib/local.zsh
