@@ -1,5 +1,13 @@
 #!/bin/zsh
 #
-# .zstyles - zstyle settings for features/plugins that need them.
+# .zstyles - zstyle settings for features/plugins that need them
 #
 
+# Auto convert .... to ../..
+zstyle ':zim:input' double-dot-expand no
+
+# Terminal title
+zstyle ':zim:termtitle' format '%1~'
+
+# Editor
+zstyle ':plugin:editor' emacs 'yes'

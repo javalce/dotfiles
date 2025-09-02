@@ -1,23 +1,30 @@
 #!/bin/zsh
 #
-# .zshrc - Zsh file loaded on interactive shell sessions.
+# .zshrc - Run on interactive Zsh session.
 #
 
-# Zsh options.
-setopt extended_glob
+# Load colors
+autoload -U colors && colors
 
-# Set variables
-ZSH_HOME=${ZDOTDIR:-$HOME/.config/zsh}
-ZSH_CUSTOM=${ZSH_HOME}/plugins
+# Zsh configuration paths.
+export ZSH_HOME=${HOME}/.config/zsh
+export ZSH_PLUGINS=${ZSH_HOME}/plugins
 
-# Source zstyles you might use with antidote.
-[[ -e $ZSH_HOME/zstyles ]] && source $ZSH_HOME/zstyles
+# Starship configuration path.
+export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
 
-# Load local config if it exists.
-[[ -e $ZSH_HOME/lib/local.zsh ]] && source $ZSH_HOME/lib/local.zsh
+# Add binary paths to $PATH if not already present.
+[[ ":$PATH:" != *":$HOME/.local/bin:"* ]] && PATH="$HOME/.local/bin:$PATH"
+[[ ":$PATH:" != *":$HOME/AppImages:"* ]] && PATH="$HOME/AppImages:$PATH"
 
-# Create an amazing Zsh config using antidote plugins.
-source $ZSH_HOME/lib/antidote.zsh
+# Load zstyles file with customizations.
+[[ -r ${ZSH_HOME}/zstyles ]] && source ${ZSH_HOME}/zstyles
+
+# Load Zimfw plugin manager.
+source $ZSH_HOME/lib/zimfw.zsh
+
+# Source aliases you might use
+[[ -r ${ZSH_HOME}/zaliases ]] && source ${ZSH_HOME}/zaliases
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

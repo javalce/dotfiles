@@ -1,11 +1,19 @@
-FNM_DIR=${FNM_DIR:-${HOME}/.local/share/fnm}
+() {
+  FNM_DIR=${FNM_DIR:-${HOME}/.local/share/fnm}
+  [[ ":PATH:" != *":$FNM_DIR:"* ]] && PATH="$FNM_DIR:$PATH"
 
-[[ ":PATH:" != *":$FNM_DIR:"* ]] && PATH="$FNM_DIR:$PATH" && eval "$(fnm env --use-on-cd)"
+  local command=${commands[fnm]}
+  [[ -z $command ]] && return 1
 
-if [[ ! -f "$ZSH_CACHE_DIR/completions/_fnm" ]]; then
-  autoload -Uz _fnm
-  typeset -g -A _comps
-  _comps[fnm]=_fnm
-fi
+  # loading fnm environment
+  if [[ -z "$FNM_MULTISHELL_PATH" ]]; then
+    eval "$($command env --use-on-cd)"
+  fi
 
-fnm completions --shell=zsh >|"$ZSH_CACHE_DIR/completions/_fnm" &|
+  # generating completions
+  local compfile=${ZSH_CACHE_DIR}/completions/_fnm
+  if [[ ! -e $compfile || $compfile -ot $command ]]; then
+    $command completions --shell=zsh >| $compfile
+    print -u2 -PR "* Detected new version 'fnm'. Regenerated completions."
+  fi
+} ${0:h}

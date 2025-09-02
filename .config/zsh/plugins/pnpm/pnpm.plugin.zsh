@@ -1,11 +1,15 @@
-PNPM_HOME=${PNPM_HOME:-${HOME}/.local/share/pnpm}
+() {
+  PNPM_HOME=${PNPM_HOME:-$HOME/.local/share/pnpm}
 
-[[ ":PATH:" != *":$PNPM_HOME:"* ]] && PATH="$PNPM_HOME:$PATH"
+  [[ ":$PATH:" != *":$PNPM_HOME:"* ]] && PATH="$PNPM_HOME:$PATH"
 
-if [[ ! -f "$ZSH_CACHE_DIR/completions/_pnpm" ]]; then
-  autoload -Uz _pnpm
-  typeset -g -A _comps
-  _comps[pnpm]=_pnpm
-fi
+  local command=${commands[pnpm]}
+  [[ -z $command ]] && return 1
 
-pnpm completion zsh >|"$ZSH_CACHE_DIR/completions/_pnpm" &|
+  # generating completions
+  # local compfile=${ZSH_CACHE_DIR}/completions/_pnpm
+  # if [[ ! -e $compfile || $compfile -ot $command ]]; then
+  #   $command completion zsh >| $compfile
+  #   print -u2 -PR "* Detected new version 'pnpm'. Regenerated completions."
+  # fi
+}
