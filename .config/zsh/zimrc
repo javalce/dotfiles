@@ -41,7 +41,6 @@ zmodule ohmyzsh/ohmyzsh --root plugins/pj
 #
 
 zmodule input
-zmodule ${ZSH_PLUGINS}/editor
 
 #
 # Custom plugins

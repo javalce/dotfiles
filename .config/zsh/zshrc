@@ -20,6 +20,20 @@ export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
 # Load zstyles file with customizations.
 [[ -r ${ZSH_HOME}/zstyles ]] && source ${ZSH_HOME}/zstyles
 
+# Set preferred editor mode: emacs or vim.
+if zstyle -t ':plugin:editor' emacs; then
+  bindkey -e
+else
+  bindkey -v
+fi
+
+# Set preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
 # Load Zimfw plugin manager.
 source $ZSH_HOME/lib/zimfw.zsh
 
