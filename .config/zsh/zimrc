@@ -37,6 +37,11 @@ zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
 zmodule ohmyzsh/ohmyzsh --root plugins/pj
 
 #
+# Git aliases
+#
+zmodule git
+
+#
 # Editor
 #
 
@@ -46,16 +51,13 @@ zmodule input
 # Custom plugins
 #
 
-# zmodule ${ZSH_PLUGINS}/pj
 zmodule ${ZSH_PLUGINS}/atuin
 zmodule ${ZSH_PLUGINS}/clipboard
 zmodule ${ZSH_PLUGINS}/fnm
-zmodule ${ZSH_PLUGINS}/git
+zmodule ${ZSH_PLUGINS}/docker
 zmodule ${ZSH_PLUGINS}/pnpm
-zmodule git@github.com:g-plane/pnpm-shell-completion.git --on-pull './zplug.zsh'
 zmodule ${ZSH_PLUGINS}/bun
 zmodule ${ZSH_PLUGINS}/python
-# zmodule ${ZSH_PLUGINS}/multiplexor
 
 #
 # Fish-like features

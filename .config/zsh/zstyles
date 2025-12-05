@@ -11,3 +11,10 @@ zstyle ':zim:termtitle' format '%1~'
 
 # Editor
 zstyle ':plugin:editor' emacs 'yes'
+
+# Zimfw git module
+# zstyle ':zim:git' aliases-prefix 'g'
+
+# Oh My Zsh config
+zstyle ':omz:plugins:docker' aliases no
+zstyle ':omz:plugins:docker-compose' aliases no

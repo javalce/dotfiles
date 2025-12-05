@@ -1,6 +1,6 @@
 () {
   local command=${commands[atuin]}
-  [[ -z $command ]] && return 1
+  [[ -z $command && -d $HOME/.atuin ]] && source "$HOME/.atuin/bin/env" || return 1
 
   local initfile=$1/atuin-init.zsh
   if [[ ! -e $initfile || $initfile -ot $command ]]; then
