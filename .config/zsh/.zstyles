@@ -1,0 +1,14 @@
+#!/bin/zsh
+#
+# .zstyles - zstyle settings for features/plugins that need them
+#
+
+# Auto convert .... to ../..
+zstyle ':zim:input' double-dot-expand no
+
+# Terminal title
+zstyle ':zim:termtitle' format '%1~'
+
+# Multiplexor plugin - use tmux/zellij as the terminal multiplexer
+zstyle ':plugin:multiplexor' command zellij
+

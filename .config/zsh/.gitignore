@@ -1,3 +1,6 @@
+.zcompcache/
+.zcompdump*
+.zhistory
+.zsh_history
 *.zwc
 *.zwc.old
-*-init.zsh

@@ -6,11 +6,11 @@ export ZIM_HOME=${HOME}/.zim
 export ZIM_CONFIG_FILE=${ZSH_HOME}/zimrc
 
 # Set ZSH_CACHE_DIR to the path where cache files should be created
-ZSH_CACHE_DIR=${ZSH_CACHE_DIR:-${XDG_CACHE_HOME:-${HOME}/.cache}/zsh}
+# ZSH_CACHE_DIR=${ZSH_CACHE_DIR:-${XDG_CACHE_HOME:-${HOME}/.cache}/zsh}
 
 # Create cache and completions dir and add to $fpath
-mkdir -p "$ZSH_CACHE_DIR/completions"
-(( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=($ZSH_CACHE_DIR/completions $fpath)
+# mkdir -p "$ZSH_CACHE_DIR/completions"
+# (( ${fpath[(Ie)$ZSH_CACHE_DIR/completions]} )) || fpath=($ZSH_CACHE_DIR/completions $fpath)
 
 #
 # Load Zimfw plugin manager

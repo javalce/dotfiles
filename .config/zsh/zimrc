@@ -3,26 +3,22 @@
 #
 # Init
 #
-
 zmodule environment
 
 #
 # Completion
 #
-
 zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
 
 #
 # Prompt
 #
-
 zmodule joke/zim-starship
 
 #
 # Utils
 #
-
 zmodule termtitle
 zmodule utility
 zmodule kiesman99/zim-zoxide
@@ -31,37 +27,31 @@ zmodule sunlei/zsh-ssh
 #
 # Oh My Zsh plugins (no alternative modules)
 #
-
 zmodule ohmyzsh/ohmyzsh --root plugins/aliases
-zmodule ohmyzsh/ohmyzsh --root plugins/colored-man-pages
 zmodule ohmyzsh/ohmyzsh --root plugins/pj
-
-#
-# Git aliases
-#
-zmodule git
 
 #
 # Editor
 #
-
 zmodule input
 
 #
 # Custom plugins
 #
-
 zmodule ${ZSH_PLUGINS}/atuin
-zmodule ${ZSH_PLUGINS}/clipboard
 zmodule ${ZSH_PLUGINS}/fnm
-zmodule ${ZSH_PLUGINS}/docker
 zmodule ${ZSH_PLUGINS}/pnpm
 zmodule ${ZSH_PLUGINS}/bun
 zmodule ${ZSH_PLUGINS}/python
 
 #
+# Multiplexor
+#
+zmodule ${ZSH_PLUGINS}/multiplexor
+
+#
 # Fish-like features
 #
-
-zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-syntax-highlighting --disabled
+zmodule zdharma-continuum/fast-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions

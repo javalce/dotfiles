@@ -7,9 +7,12 @@
   [[ -z $command ]] && return 1
 
   # generating completions
-  local compfile=${ZSH_CACHE_DIR}/completions/_pnpm
+  local compfile=$1/completion-for-pnpm.zsh
   if [[ ! -e $compfile || $compfile -ot $command ]]; then
     $command completion zsh >| $compfile
+    zcompile -UR $compfile
     print -u2 -PR "* Detected new version 'pnpm'. Regenerated completions."
   fi
-}
+
+  source $compfile
+} ${0:h}

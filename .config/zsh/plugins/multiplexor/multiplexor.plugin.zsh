@@ -1,24 +1,36 @@
-(( ${+commands[tmux]} || ${+commands[zellij]} )) && () {
-  if ! [[ -n "$MULTIPLEXOR" ]]; then
-    return
-  fi
+() {
+  check_environment() {
+    local mux="$1"
+    declare -p "$mux" &>/dev/null
+    [[ $? -ne 0 && $- == *i* && -t 1 ]]
+  }
 
-  function _start_multiplexer() {
-    local command
-    local wm_var
-    if [[ $MULTIPLEXOR == tmux ]]; then
-      command=${commands[tmux]}
-      vm_var="$TMUX"
-    else
-      command=${commands[zellij]}
-      vm_var="$ZELLIJ"
-    fi
-
-    if [[ $- == *i* ]] && [[ -z "$vm_var" ]] && [[ -t 1 ]]; then
-      exec $command
+  exec_multiplexor() {
+    local mux="$1"
+    local cmd="$2"
+    if check_environment "$mux"; then
+      exec $cmd
     fi
   }
 
-  autoload -Uz add-zsh-hook
-  add-zsh-hook precmd _start_multiplexer
-}
+  zstyle -s :plugin:multiplexor command multiplexor
+
+  local multiplexors=("tmux" "zellij")
+  [[ ! "${multiplexors[@]}" =~ "$multiplexor" ]] && return 1
+
+  local command=${commands[$multiplexor]}
+  [[ -z $command ]] && return 1
+
+  if [[ "$multiplexor" == "tmux" ]]; then
+    local tpm_plugin=~/.tmux/plugins/tpm
+    if [ ! -d "$tpm_plugin" ]; then
+      git clone https://github.com/tmux-plugins/tpm "$tpm_plugin"
+    fi
+
+    exec_multiplexor "TMUX" "$command"
+  elif [[ "$multiplexor" == "zellij" ]]; then
+    exec_multiplexor "ZELLIJ" "$command"
+  fi
+
+  unset -f check_environment exec_multiplexor
+} ${0:h}
