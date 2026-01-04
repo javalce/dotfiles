@@ -22,6 +22,10 @@ return {
       },
       options = {
         cursorline = true,
+        transparency = true,
+        terminal_colors = true,
+        lualine_transparency = true,
+        highlight_inactive_windows = false,
       },
     },
   },
@@ -36,6 +40,11 @@ return {
     },
   },
   {
+    "Gentleman-Programming/gentleman-kanagawa-blur",
+    name = "gentleman-kanagawa-blur",
+    priority = 1000,
+  },
+  {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     lazy = true,
@@ -48,7 +57,7 @@ return {
         keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = false, -- do not set background color
+        transparent = true, -- do not set background color
         dimInactive = false, -- dim inactive window `:h hl-NormalNC`
         terminalColors = true, -- define vim.g.terminal_color_{0,17}
         colors = { -- add/modify theme and palette colors
@@ -88,10 +97,11 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "onedark",
+      -- colorscheme = "onedark_dark",
       -- colorscheme = "tokyonight-night",
       -- colorscheme = "kanagawa",
       -- colorscheme = "catppuccin",
+      colorscheme = "gentleman-kanagawa-blur",
     },
   },
 }

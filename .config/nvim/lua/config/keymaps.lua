@@ -3,13 +3,8 @@
 -- Add any additional keymaps here
 
 -- Quick switch between buffers
-vim.keymap.set("n", "<tab>", "<cmd>BufferLineCycleNext<cr>")
-vim.keymap.set("n", "<S-tab>", "<cmd>BufferLineCyclePrev<cr>")
+-- vim.keymap.set("n", "<tab>", "<cmd>BufferLineCycleNext<cr>")
+-- vim.keymap.set("n", "<S-tab>", "<cmd>BufferLineCyclePrev<cr>")
 
 -- Map Ctrl-c to escape from other modes
 vim.keymap.set({ "i", "n", "v" }, "<C-c>", [[<C-\><C-n>]])
-
--- vim.keymap.set("n", "<leader>o", "<cmd>Neotree focus<cr>", { desc = "Explorer NeoTree Focus" })
-
------ OIL -----
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

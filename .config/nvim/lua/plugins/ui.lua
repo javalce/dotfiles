@@ -1,4 +1,38 @@
 return {
+  -- Plugin: lualine.nvim
+  -- URL: https://github.com/nvim-lualine/lualine.nvim
+  -- Description: A blazing fast and easy to configure Neovim statusline plugin.
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy", -- Load this plugin on the 'VeryLazy' event
+    requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- Optional dependency for icons
+    opts = {
+      extensions = {
+        "quickfix",
+        {
+          filetypes = { "oil" },
+          sections = {
+            lualine_a = {
+              "mode",
+            },
+            lualine_b = {
+              function()
+                local ok, oil = pcall(require, "oil")
+                if not ok then
+                  return ""
+                end
+
+                ---@diagnostic disable-next-line: param-type-mismatch
+                local path = vim.fn.fnamemodify(oil.get_current_dir(), ":~")
+                return path .. " %m"
+              end,
+            },
+          },
+        },
+      },
+    },
+  },
+
   -- Plugin: incline.nvim
   -- URL: https://github.com/b0o/incline.nvim
   -- Description: A Neovim plugin for showing the current filename in a floating window.

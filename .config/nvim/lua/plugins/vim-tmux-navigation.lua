@@ -6,7 +6,9 @@ return {
   -- Description: A Neovim plugin that allows seamless navigation between Neovim and tmux panes.
   {
     "alexghergh/nvim-tmux-navigation",
-
+    enabled = function()
+      return vim.env.TMUX ~= nil
+    end,
     keys = function()
       local nvim_tmux_navigation = require("nvim-tmux-navigation")
 

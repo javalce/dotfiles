@@ -28,6 +28,6 @@ return {
   },
   opts = {
     preset = "classic",
-    win = { border = "single" },
+    win = { border = "rounded" },
   },
 }
