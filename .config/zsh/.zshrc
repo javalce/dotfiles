@@ -16,6 +16,7 @@ export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
 # Add binary paths to $PATH if not already present.
 [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] && PATH="$HOME/.local/bin:$PATH"
 [[ ":$PATH:" != *":$HOME/AppImages:"* ]] && PATH="$HOME/AppImages:$PATH"
+[[ ":$PATH:" != *":$HOME/go/bin:"* ]] && PATH="$HOME/go/bin:$PATH"
 
 # Lazy-load (autoload) Zsh function files from a directory
 fpath=($ZSH_HOME/functions $fpath)
