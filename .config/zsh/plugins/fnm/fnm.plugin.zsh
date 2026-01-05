@@ -12,8 +12,6 @@
     print -u2 -PR "* Detected new version 'fnm'. Regenerated completions."
   fi
 
-  # sourcing init file only if FNM_MULTISHELL_PATH is not set
-  if [[ -z "$FNM_MULTISHELL_PATH" ]]; then
-    eval "$($command env --use-on-cd --shell zsh)"
-  fi
+  # loading fnm environment
+  eval "$($command env --use-on-cd --shell=zsh)"
 } ${0:h}
