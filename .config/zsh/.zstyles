@@ -10,5 +10,5 @@ zstyle ':zim:input' double-dot-expand no
 zstyle ':zim:termtitle' format '%1~'
 
 # Multiplexor plugin - use tmux/zellij as the terminal multiplexer
-zstyle ':plugin:multiplexor' command tmux
+zstyle ':plugin:multiplexor' command no
 
