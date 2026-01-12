@@ -33,7 +33,7 @@ window-padding-color = extend
 window-step-resize = false
 window-padding-balance = true
 
-gtk-tabs-location = hidden
+# gtk-tabs-location = hidden
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
