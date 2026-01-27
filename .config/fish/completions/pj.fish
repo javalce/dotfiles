@@ -1,30 +1,8 @@
-function __pj_complete
-    # Devuelve nombres cortos para cada ruta en PROJECT_PATHS (basename lowercased y limpiado)
-    if not set -q PROJECT_PATHS
-        return
-    end
+# Complete 'open' subcommand when no subcommand given yet
+complete --command pj --no-files --condition '__fish_is_first_arg' --arguments 'open' --description 'Open project in editor'
 
-    set -l seen
-    for base in $PROJECT_PATHS
-        if test -d "$base"
-            set -l bname (basename "$base")
-            set -l short (string lower $bname)
-            # eliminar caracteres no alfanuméricos
-            set short (string replace -r '[^[:alnum:]]+' '' $short)
-            if test -z "$short"
-                continue
-            end
-            # evitar duplicados (mantener la primera aparición)
-            if contains -- $short $seen
-                continue
-            end
-            set seen $seen $short
-            # imprimir 'valor<TAB>descripción' para que fish muestre la ruta completa
-            printf '%s\t%s\n' $short $base
-        end
-    end
-end
+# Complete project names as first argument (no subcommand)
+complete --command pj --no-files --condition '__fish_is_first_arg' --arguments '(__project_basenames)'
 
-# Completar el primer argumento de pj con nombres derivados de PROJECT_PATHS
-# -f evita que fish añada completions de archivos/directorios (p.ej. el directorio actual)
-complete -c pj -f -a '(__pj_complete)'
+# Complete project names after 'open' subcommand
+complete --command pj --no-files --condition '__fish_seen_subcommand_from open' --arguments '(__project_basenames)'

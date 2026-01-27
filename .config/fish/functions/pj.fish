@@ -1,93 +1,58 @@
-##? prj - project jumper
+function pj --description "Jump to a project"
+  set -l argc (count $argv)
 
-# pj [path]
-# - si se pasa un path y existe, fzf buscará solo en ese path
-# - si no se pasa parámetro o el path pasado no existe, buscará en todos PROJECT_PATHS
-function pj
-    # pj [group]
-    # Optimized: stream directories to fzf, prefer fd, avoid building large lists.
-    set -l target_arg $argv[1]
+  if test (count $PROJECT_PATHS) -eq 0
+    echo 'Add some directories to the environment variable $PROJECT_PATHS to get started!'
+    echo '  set -gx PROJECT_PATHS ~/dir1 ~/dir2'
+    return 1
 
-    if not type -q fzf
-        printf 'pj: "fzf" not found. Please install fzf to use this command (https://github.com/junegunn/fzf)\n' >&2
-        return 1
-    end
+  else if test $argc -le 0 -o $argc -gt 2
+    echo 'Usage: pj [open] [PROJECT]'
+    return 1
 
-    if not set -q PROJECT_PATHS
-        printf 'pj: PROJECT_PATHS is not defined. Example:\n  set -a PROJECT_PATHS $HOME/Documents\n' >&2
-        return 1
-    end
+  else if test $argc -eq 2 -a $argv[1] != 'open'
+    echo 'Usage: pj [open] [PROJECT]'
+    return 1
 
-    # Preferir fd si está disponible
-    set -l have_fd 0
-    if type -q fd
-        set have_fd 1
-    end
+  else if contains -- --help $argv
+    echo 'Usage: pj [open] [PROJECT]'
 
-    # Si hay argumento, mapear short -> base en una pasada y validar
-    set -l search_paths
-    if test -n "$target_arg"
-        set -l found_base
-        for base in $PROJECT_PATHS
-            if not test -d "$base"
-                continue
-            end
-            set -l bname (basename "$base")
-            set -l short (string lower $bname)
-            set short (string replace -r '[^[:alnum:]]+' '' $short)
-            if test "$short" = "$target_arg"
-                set found_base $base
-                break
-            end
-        end
-        if test -z "$found_base"
-            # construir lista de válidos para mensaje
-            set -l valids
-            for base in $PROJECT_PATHS
-                if test -d "$base"
-                    set -l nm (basename "$base")
-                    set nm (string lower $nm)
-                    set nm (string replace -r '[^[:alnum:]]+' '' $nm)
-                    if test -n "$nm"
-                        set valids $valids $nm
-                    end
-                end
-            end
-            set -l valid_list (string join ', ' $valids)
-            printf "pj: unknown project group '%s'. Valid groups: %s\n" $target_arg $valid_list >&2
-            return 1
-        end
-        set search_paths $found_base
+  else if test $argv[1] = "open"
+    set -l target (find $PROJECT_PATHS -maxdepth 1 -name "$argv[2]" | head -n 1)
+
+    if test -n "$target"
+      cd "$target"
+      $EDITOR "$target"
     else
-        set search_paths $PROJECT_PATHS
+      echo "No such project: $argv[2]"
+      return 1
     end
 
-    # Construir la lista en memoria y pasarla a fzf
-    set -l projects
-    for base in $search_paths
-        if test -d "$base"
-            if test $have_fd -eq 1
-                for d in (fd --type d --max-depth 1 --absolute-path . "$base" 2>/dev/null)
-                    set projects $projects $d
-                end
-            else
-                for d in (find "$base" -maxdepth 1 -mindepth 1 -type d 2>/dev/null)
-                    set projects $projects $d
-                end
-            end
-        end
-    end
+  else
+    set -l target (find $PROJECT_PATHS -maxdepth 1 -name "$argv[1]" | head -n 1)
 
-    if test (count $projects) -eq 0
-        set -l search_list (string join ', ' $search_paths)
-        printf "pj: no projects found in: %s\n" $search_list >&2
-        return 1
+    if test -n "$target"
+      cd $target
+    else
+      echo "No such project: $argv[1]"
+      return 1
     end
+  end
+end
 
-    set -l selection (printf "%s\n" $projects | fzf --layout=reverse-list)
+function __project_basenames --description "List of project basenames"
+  set -l project_basenames
 
-    if test -n "$selection" -a -d "$selection"
-        echo "Selected directory: $selection"
-        cd "$selection" || return
+  for pp in $PROJECT_PATHS
+    set -l contains_files (ls -A $pp 2>/dev/null)
+
+    if test -n "$contains_files"
+      set -a project_basenames (basename $pp)
+      for project in (find "$pp" -maxdepth 1 -mindepth 1 -type d -not -name '.*' -exec basename {} \;)
+        set -a project_basenames $project
+      end
     end
+  end
+
+  printf '%s\n' $project_basenames
 end
