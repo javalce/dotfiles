@@ -9,7 +9,7 @@ else
     set -x EDITOR nvim
 end
 
-fish_add_path -g $HOME/.local/bin $HOME/AppImages $FNM_DIR $PNPM_HOME $BUN_INSTALL/bin
+fish_add_path -g $HOME/.local/bin $HOME/AppImages $FNM_DIR $PNPM_HOME $BUN_INSTALL/bin $HOME/.lmstudio/bin
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -20,14 +20,16 @@ if status is-interactive
         fisher install jorgebucaran/fisher
     end
 
-    # Start tmux/zellij
-    if not set -q TMUX
-        exec tmux
-    end
+    if test "$TERM_PROGRAM" != vscode; and test -t 1
+        # Start tmux/zellij
+        if not set -q TMUX
+            exec tmux
+        end
 
-    # if not set -q ZELLIJ
-    #     exec zellij
-    # end
+        # if not set -q ZELLIJ
+        #     exec zellij
+        # end
+    end
 end
 
 starship init fish | source
@@ -45,6 +47,17 @@ carapace _carapace | source
 
 if test -f ~/.config/fish/local.fish
     source ~/.config/fish/local.fish
+end
+
+if type -q yazi
+    function y
+        set tmp (mktemp -t "yazi-cwd.XXXXXX")
+        command yazi $argv --cwd-file="$tmp"
+        if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+            builtin cd -- "$cwd"
+        end
+        rm -f -- "$tmp"
+    end
 end
 
 set -g fish_greeting ""

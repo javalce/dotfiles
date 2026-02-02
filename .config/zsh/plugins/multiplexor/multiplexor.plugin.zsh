@@ -1,4 +1,6 @@
 () {
+  [[ "$TERM_PROGRAM" == "vscode" ]] && return 0
+
   check_environment() {
     local mux="$1"
     declare -p "$mux" &>/dev/null
