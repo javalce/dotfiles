@@ -32,10 +32,10 @@ if status is-interactive
     end
 end
 
+fzf --fish | source
 starship init fish | source
 zoxide init fish | source
 atuin init fish --disable-up-arrow | source
-fzf --fish | source
 
 if not set -q FNM_MULTISHELL_PATH
     fnm env --use-on-cd --shell fish | source
@@ -47,17 +47,6 @@ carapace _carapace | source
 
 if test -f ~/.config/fish/local.fish
     source ~/.config/fish/local.fish
-end
-
-if type -q yazi
-    function y
-        set tmp (mktemp -t "yazi-cwd.XXXXXX")
-        command yazi $argv --cwd-file="$tmp"
-        if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
-            builtin cd -- "$cwd"
-        end
-        rm -f -- "$tmp"
-    end
 end
 
 set -g fish_greeting ""
