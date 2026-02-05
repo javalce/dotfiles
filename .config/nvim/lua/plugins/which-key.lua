@@ -27,7 +27,7 @@ return {
     },
   },
   opts = {
-    preset = "classic",
+    preset = "helix",
     win = { border = "rounded" },
   },
 }

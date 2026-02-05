@@ -73,6 +73,8 @@ return {
           ".git",
           "node_modules",
           ".venv",
+          "dist",
+          "build",
         },
         matcher = {
           fuzzy = true,
