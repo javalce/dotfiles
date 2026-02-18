@@ -21,6 +21,14 @@ return {
       desc = "Show which-key popup",
     },
     {
+      -- Keybinding to restart LSP servers
+      "<leader>xr",
+      function()
+        vim.cmd("LspRestart")
+      end,
+      desc = "Restart LSP servers",
+    },
+    {
       -- Define a group for Obsidian-related commands
       "<leader>o",
       group = "obsidian",
