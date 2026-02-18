@@ -37,9 +37,7 @@ starship init fish | source
 zoxide init fish | source
 atuin init fish --disable-up-arrow | source
 
-if not set -q FNM_MULTISHELL_PATH
-    fnm env --use-on-cd --shell fish | source
-end
+fnm env --use-on-cd --shell fish | source
 
 set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 
