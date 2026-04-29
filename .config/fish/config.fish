@@ -9,7 +9,7 @@ else
     set -x EDITOR nvim
 end
 
-fish_add_path -g $HOME/.local/bin $HOME/AppImages $FNM_DIR $PNPM_HOME $BUN_INSTALL/bin $HOME/.lmstudio/bin
+fish_add_path -g $HOME/.local/bin $HOME/AppImages $FNM_DIR $PNPM_HOME $BUN_INSTALL/bin $HOME/go/bin $HOME/.lmstudio/bin $HOME/.opencode/bin
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -20,7 +20,7 @@ if status is-interactive
         fisher install jorgebucaran/fisher
     end
 
-    if test "$TERM_PROGRAM" != vscode; and test -t 1
+    if not contains "$TERM_PROGRAM" vscode zed; and test -t 1
         # Start tmux/zellij
         if not set -q TMUX
             exec tmux
