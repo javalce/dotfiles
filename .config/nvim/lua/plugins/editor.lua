@@ -8,4 +8,8 @@ return {
       require("veil").setup()
     end,
   },
+  {
+    "cachebag/nvim-tcss",
+    config = true,
+  },
 }
