@@ -1,5 +1,5 @@
 () {
-  BUN_INSTALL=$HOME/.bun
+  export BUN_INSTALL=$HOME/.bun
   [[ ":$PATH:" != *":$BUN_INSTALL/bin:"* ]] && PATH="$BUN_INSTALL/bin:$PATH"
 
   local command=${commands[bun]}
