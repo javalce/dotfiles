@@ -1,38 +1,33 @@
 () {
-  [[ "$TERM_PROGRAM" == "vscode" ]] && return 0
+  [[ $- == *i* && -t 1 ]] || return 0
 
-  check_environment() {
-    local mux="$1"
-    declare -p "$mux" &>/dev/null
-    [[ $? -ne 0 && $- == *i* && -t 1 ]]
-  }
-
-  exec_multiplexor() {
-    local mux="$1"
-    local cmd="$2"
-    if check_environment "$mux"; then
-      exec $cmd
-    fi
-  }
+  case "$TERM_PROGRAM" in
+    vscode|zed) return 0 ;;
+  esac
 
   zstyle -s :plugin:multiplexor command multiplexor
-
-  local multiplexors=("tmux" "zellij")
-  [[ ! "${multiplexors[@]}" =~ "$multiplexor" ]] && return 1
 
   local command=${commands[$multiplexor]}
   [[ -z $command ]] && return 1
 
-  if [[ "$multiplexor" == "tmux" ]]; then
-    local tpm_plugin=~/.tmux/plugins/tpm
-    if [ ! -d "$tpm_plugin" ]; then
-      git clone https://github.com/tmux-plugins/tpm "$tpm_plugin"
-    fi
 
-    exec_multiplexor "TMUX" "$command"
-  elif [[ "$multiplexor" == "zellij" ]]; then
-    exec_multiplexor "ZELLIJ" "$command"
-  fi
+  case "$multiplexor" in
+    tmux)
+      [[ -z $TMUX ]] || return 0
 
-  unset -f check_environment exec_multiplexor
+      local tpm_plugin=~/.tmux/plugins/tpm
+      if [ ! -d "$tpm_plugin" ]; then
+        git clone https://github.com/tmux-plugins/tpm "$tpm_plugin"
+      fi
+
+      exec $command
+      ;;
+    zellij)
+      [[ -z $ZELLIJ ]] || return 0
+      exec $command
+      ;;
+    *)
+      return 0
+      ;;
+  esac
 } ${0:h}

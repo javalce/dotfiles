@@ -1,7 +1,7 @@
 () {
   export PNPM_HOME=${PNPM_HOME:-$HOME/.local/share/pnpm}
 
-  [[ ":$PATH:" != *":$PNPM_HOME:"* ]] && PATH="$PNPM_HOME:$PATH"
+  [[ ":$PATH:" != *":$PNPM_HOME/bin:"* ]] && PATH="$PNPM_HOME/bin:$PATH"
 
   local command=${commands[pnpm]}
   [[ -z $command ]] && return 1
