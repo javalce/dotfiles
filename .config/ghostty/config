@@ -32,6 +32,8 @@ background-blur = true
 window-padding-color = extend
 window-step-resize = false
 window-padding-balance = true
+window-height = 100
+window-width = 200
 
 # gtk-tabs-location = hidden
 
