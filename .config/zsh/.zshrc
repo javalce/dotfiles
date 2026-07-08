@@ -32,12 +32,6 @@ else
   export EDITOR='nvim'
 fi
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_DEFAULT_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exlude .git"
-
-alias fzfbat='fzf --preview="bat --theme=gruvbox-dark --color=always {}"'
-alias fzfnvim='nvim $(fzf --preview="bat --theme=gruvbox-dark --color=always {}")'
 
 # Load zstyles file with customizations.
 [[ -r ${ZSH_HOME}/.zstyles ]] && source ${ZSH_HOME}/.zstyles

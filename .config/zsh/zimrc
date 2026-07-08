@@ -38,6 +38,7 @@ zmodule input
 #
 # Custom plugins
 #
+zmodule ${ZSH_PLUGINS}/fzf
 zmodule ${ZSH_PLUGINS}/atuin
 zmodule ${ZSH_PLUGINS}/zoxide
 zmodule ${ZSH_PLUGINS}/fnm
