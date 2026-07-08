@@ -13,7 +13,6 @@ shell-integration-features = no-cursor,sudo,title,ssh-terminfo,ssh-env
 cursor-style = block
 cursor-style-blink = false
 
-
 # ┌──────────────────────────────────────────────────────────────────────────────┐
 # │                                   FONT                                       │
 # └──────────────────────────────────────────────────────────────────────────────┘
@@ -32,8 +31,7 @@ background-blur = true
 window-padding-color = extend
 window-step-resize = false
 window-padding-balance = true
-window-height = 100
-window-width = 200
+maximize = true
 
 # gtk-tabs-location = hidden
 
@@ -64,7 +62,7 @@ keybind = ctrl+shift+alt+h=resize_split:left,10
 keybind = ctrl+shift+alt+l=resize_split:right,10
 
 # Miscellaneous
-keybind = ctrl+;=reload_config
+# keybind = ctrl+;=reload_config
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
