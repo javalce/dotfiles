@@ -5,6 +5,8 @@
     vscode|zed) return 0 ;;
   esac
 
+  [[ "$GHOSTTY_QUICK_TERMINAL" == "1" ]] && return 0
+
   zstyle -s :plugin:multiplexor command multiplexor
 
   local command=${commands[$multiplexor]}
