@@ -5,31 +5,19 @@
     vscode|zed) return 0 ;;
   esac
 
+  [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]] && return 0
   [[ "$GHOSTTY_QUICK_TERMINAL" == "1" ]] && return 0
 
-  zstyle -s :plugin:multiplexor command multiplexor
+  local multiplexor command
 
-  local command=${commands[$multiplexor]}
-  [[ -z $command ]] && return 1
+  zstyle -s :plugin:multiplexor command multiplexor || return 0
 
+  command=${commands[$multiplexor]}
+  [[ -z $command ]] && return 0
 
-  case "$multiplexor" in
-    tmux)
-      [[ -z $TMUX ]] || return 0
+  if [[ "$multiplexor" == "tmux" && -n $TMUX ]] || [[ $multiplexor == "zellij" && -n $ZELLIJ ]]; then
+    return 0
+  fi
 
-      local tpm_plugin=~/.tmux/plugins/tpm
-      if [ ! -d "$tpm_plugin" ]; then
-        git clone https://github.com/tmux-plugins/tpm "$tpm_plugin"
-      fi
-
-      exec $command
-      ;;
-    zellij)
-      [[ -z $ZELLIJ ]] || return 0
-      exec $command
-      ;;
-    *)
-      return 0
-      ;;
-  esac
+  exec "$command"
 } ${0:h}
