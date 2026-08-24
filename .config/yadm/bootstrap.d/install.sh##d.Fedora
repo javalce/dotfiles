@@ -8,13 +8,14 @@ prepare_environment() {
     sudo dnf install make cmake -y
 
     # Install packages to allow apt to use a repository over HTTPS
-    sudo dnf install -y ca-certificates curl gnupg wget git unzip tar
+    sudo dnf install -y ca-certificates curl gnupg wget git zip unzip tar
 
     # Install gitflow-avh
-    sudo dnf copr enable elegos/gitflow
-    sudo dnf install gitflow -y
+    # sudo dnf copr enable elegos/gitflow
+    # sudo dnf install gitflow -y
 
     # Shell completions
+    mkdir -p "$HOME/.bash_completion.d"
     cat <<EOF >"$HOME/.bash_completion"
 if [ -d "\$HOME/.bash_completion.d" ]; then
     for file in \$HOME/.bash_completion.d/*; do
@@ -36,25 +37,40 @@ install_terminal_tools() {
     sudo dnf install -y vim neovim
 
     # Install starship prompt theme
-    sudo dnf copr enable atim/starship
+    sudo dnf copr enable atim/starship -y
     sudo dnf install -y starship
 
     # Install terminal tools
-    sudo dnf install -y zoxide ripgrep tealdeer bat lsd rofi fzf fd-find
+    sudo dnf install -y zoxide atuin ripgrep tealdeer bat lsd fzf fd-find
 
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.atuin.sh | sh
+    # Install lazygit
+    sudo dnf copr enable dejan/lazygit -y
+    sudo dnf install -y lazygit
+
+    # Install tmux and zellij
+    sudo dnf install -y tmux
+    sudo dnf copr enable gigirassy/zellij -y
+    sudo dnf install -y zellij
+
+    # Install tmux plugin manager (tpm)
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+
+    # Install golang
+    sudo dnf install -y golang
 }
 
 install_fonts() {
     # Install JetBrains Mono, JetBrainsMono Nerd Font and Cascadia Code fonts
     sudo dnf install jetbrains-mono-fonts-all cascadia-fonts-all -y
 
-    directory="$HOME/.local/share/fonts/nerd-fonts"
-    mkdir -p "$directory"
-    version=$(curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-    curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/$version/JetBrainsMono.zip" -o "$directory/JetBrainsMono.zip"
-    unzip -o "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
-    rm "$directory/JetBrainsMono.zip"
+    # directory="$HOME/.local/share/fonts/nerd-fonts"
+    # mkdir -p "$directory"
+    # version=$(curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    # curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/$version/JetBrainsMono.zip" -o "$directory/JetBrainsMono.zip"
+    # unzip -o "$directory/JetBrainsMono.zip" -d "$directory/jetbrains-mono"
+    # rm "$directory/JetBrainsMono.zip"
+    sudo dnf copr enable che/nerd-fonts -y
+    sudo dnf install -y nerd-fonts-jetbrains-mono
 }
 
 install_node() {
@@ -90,20 +106,19 @@ install_python_tools() {
     sudo dnf install -y python3-pip pipx
 
     # Install poetry and uv
-    pipx install poetry
+    # pipx install poetry
     pipx install uv
 
     # Add poetry to PATH
     export PATH="$HOME/.local/bin:$PATH"
 
     # Install poetry completions
-    poetry completions bash >"$HOME/.bash_completion.d/_poetry"
+    # poetry completions bash >"$HOME/.bash_completion.d/_poetry"
 }
 
 install_docker() {
     # Install Docker Engine
-    sudo dnf -y install dnf-plugins-core
-    sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 
     sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
@@ -112,6 +127,10 @@ install_docker() {
 
     # Add user to docker group
     sudo usermod -aG docker "$USER"
+
+    # Install lazydocker
+    sudo dnf copr enable atim/lazydocker -y
+    sudo dnf install -y lazydocker
 }
 
 install_sdkman() {
