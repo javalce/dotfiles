@@ -35,22 +35,24 @@ zmodule ohmyzsh/ohmyzsh --root plugins/pj
 #
 zmodule input
 
+zmodule antoineco/zim-zoxide
+
 #
 # Custom plugins
 #
 zmodule ${ZSH_PLUGINS}/fzf
 zmodule ${ZSH_PLUGINS}/atuin
-zmodule ${ZSH_PLUGINS}/zoxide
 zmodule ${ZSH_PLUGINS}/fnm
 zmodule ${ZSH_PLUGINS}/pnpm
 zmodule ${ZSH_PLUGINS}/bun
 zmodule ${ZSH_PLUGINS}/python
 zmodule ${ZSH_PLUGINS}/opencode
+zmodule ${ZSH_PLUGINS}/herdr
 
 #
 # Multiplexor
 #
-zmodule ${ZSH_PLUGINS}/multiplexor
+zmodule ${ZSH_PLUGINS}/multiplexor --disabled
 
 #
 # Fish-like features
