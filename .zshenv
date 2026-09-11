@@ -5,3 +5,4 @@
 #
 
 export ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
+[[ -d "$HOME/.cargo" ]] && . "$HOME/.cargo/env"

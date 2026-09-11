@@ -5,11 +5,10 @@
   local command=${commands[bun]}
   [[ -z $command ]] && return 1
 
-  #generating completions
+  # generating completions
   local compfile=$1/functions/_bun
   if [[ ! -e $compfile || $compfile -ot $command ]]; then
-    ${BUN_INSTALL}/bin/bun completions
-    cp ${BUN_INSTALL}/_bun $compfile
+    $command completions >| $compfile
     print -u2 -PR "* Detected new version 'bun'. Regenerated completions."
   fi
 } ${0:h}

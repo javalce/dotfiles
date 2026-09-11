@@ -50,11 +50,6 @@ zmodule ${ZSH_PLUGINS}/opencode
 zmodule ${ZSH_PLUGINS}/herdr
 
 #
-# Multiplexor
-#
-zmodule ${ZSH_PLUGINS}/multiplexor --disabled
-
-#
 # Fish-like features
 #
 zmodule zsh-users/zsh-syntax-highlighting --disabled

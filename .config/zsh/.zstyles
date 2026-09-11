@@ -4,11 +4,13 @@
 #
 
 # Auto convert .... to ../..
+# Disabled because it is disgusting and it is not a good idea to use ..
+# to navigate to the parent directory. It is better to use the 'cd' command explicitly.
 zstyle ':zim:input' double-dot-expand no
 
 # Terminal title
 zstyle ':zim:termtitle' format '%1~'
 
-# Multiplexor plugin - use tmux/zellij as the terminal multiplexer
-zstyle ':plugin:multiplexor' command tmux
+# FNM configuration
+zstyle ':plugins:fnm' use-on-cd yes
 

@@ -18,7 +18,8 @@ export STARSHIP_CONFIG=${HOME}/.config/starship/starship.toml
 [[ ":$PATH:" != *":$HOME/AppImages:"* ]] && PATH="$HOME/AppImages:$PATH"
 [[ ":$PATH:" != *":$HOME/go/bin:"* ]] && PATH="$HOME/go/bin:$PATH"
 
-# Lazy-load (autoload) Zsh function files from a directory
+# Lazy-load (autoload) custom Zsh function files from a directory
+# Contains: open, pbcopy, pbpaste, y
 fpath=($ZSH_HOME/functions $fpath)
 autoload -Uz $ZSH_HOME/functions/*(N.:t)
 
@@ -27,18 +28,18 @@ bindkey -e
 
 # Set preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR=${commands[vim]:-vi}
 else
-  export EDITOR='nvim'
+  export EDITOR=${commands[nvim]:-${commands[vim]:-vi}}
 fi
 
 
 # Load zstyles file with customizations.
 [[ -r ${ZSH_HOME}/.zstyles ]] && source ${ZSH_HOME}/.zstyles
 
-# Load local config
+# Load local user configuration (private, not version controlled)
 local_config=${ZSH_HOME}/lib/local.zsh
-[[ -r ${local_config} ]] || touch ${local_config} && source ${local_config}
+[[ -f ${local_config} ]] || touch ${local_config} && source ${local_config}
 unset local_config
 
 # Load Zimfw plugin manager.

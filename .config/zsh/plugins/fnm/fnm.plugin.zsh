@@ -1,5 +1,18 @@
 () {
-  FNM_DIR=${FNM_DIR:-${HOME}/.local/share/fnm}
+  if [[ -z $FNM_DIR ]]; then
+    if [[ -d "$HOME/.fnm" ]]; then
+      FNM_DIR="$HOME/.fnm"
+    elif [[ -n "$XDG_DATA_HOME" ]]; then
+      FNM_DIR="$XDG_DATA_HOME/fnm"
+    elif [[ "$OS" = "Darwin" ]]; then
+      FNM_DIR="$HOME/Library/Application Support/fnm"
+    else
+      FNM_DIR="$HOME/.local/share/fnm"
+    fi
+  fi
+
+  [[ -d "$FNM_DIR" ]] || return 0
+
   [[ ":$PATH:" != *":$FNM_DIR:"* ]] && PATH="$FNM_DIR:$PATH"
 
   local command=${commands[fnm]}
@@ -13,5 +26,9 @@
   fi
 
   # loading fnm environment
-  eval "$($command env --use-on-cd --shell=zsh)"
+  local -a fnm_env_cmd
+  if zstyle -T ':plugins:fnm' use-on-cd; then
+    fnm_env_cmd+=("--use-on-cd")
+  fi
+  eval "$($command env --shell=zsh $fnm_env_cmd)"
 } ${0:h}
